@@ -1,52 +1,8 @@
-<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="901px" height="1602px" viewBox="-0.5 -0.5 901 1602" content="&lt;mxfile&gt;&lt;diagram name=&quot;ページ1&quot; id=&quot;223eQ9ortMRZhBDlwLHS&quot;&gt;3ZZNb6MwEIZ/jaXdw0oEJwSOgZBWWu1eOOzZBQesGoyM0yT99TsGu5hCpP1oValcMvOOB9vPCzgIJ/XlTpK2+iEKypHvFReE98j3/SDYwo9WroOyCjfeoJSSFUYbhYw9UyPaYSdW0G4yUAnBFWunYi6ahuZqohEpxXk67Cj4dNaWlHQmZDnhc/UXK1Q1qJHnjfo9ZWVlZw5spSZ2sBG6ihTi7Eg4RTiRQqghqi8J5Zqe5TL0HW5UXxYmaaP+pCHbfj+qLP+5P5wyfh/nNEi7b+YuT4SfzIbNYtXVEpDi1BRU38RDOD5XTNGsJbmunsF00CpVc8hWENbiiTz0nXqwpB17dnOhiHJyeFqom9OCuSkX+WM/sb6zMdgpzwHY3VCp6MWRDJA7Kmqq5BWGnBe8rBZ9JOYBKl+aR8YQGMx/gdx/Y+RHxnkiuJB9L06SwyGKQO+UFI/Uqfj7rd4VdIhGOfqxv94b6LvxxJ+Sp/1ebiy3jwO8WQAccJg2foCg1AFKMQp9FIZ9sEJhYIII22Bvm2ANY99rpwCLmtoxxd6Ihr7yyEiEs7KBNAfYFPRYQ2bwId+ZQs2KQk+z6P/0CdGGmqNoteSw11//6bCtrg1f63gwNzxYLRm+eQPDFz5Gg5W7pA8wilITxGBlhMIdCj2UhmgHLidfTG23N23x+uvMU5gRTutb5B2rSdcOR/iRXbQXrg+bEfeM7YIDN3H7lprBjfEc93rp/Vr/w/sF6Xi+9zXnbxJOfwM=&lt;/diagram&gt;&lt;/mxfile&gt;">
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="901px" height="1602px" viewBox="-0.5 -0.5 901 1602" content="&lt;mxfile&gt;&lt;diagram name=&quot;ログイン画面&quot; id=&quot;223eQ9ortMRZhBDlwLHS&quot;&gt;7Zldb5swFIZ/jaXtYhXGhMBlIEk77UOVctFrB5xg1eAInCbtr58hdgLYlTYVum4tN7HPsbF5H3yOTQCK8+N1iXfZD54SBlwnPQI0B64LXd+RP7XlUVkgVJZtSVNluxhW9Ikoo262pympOg0F50zQXdeY8KIgiejYcFnyQ7fZhrPuqDu8JYZhlWBmWu9oKrKTNXSci/2G0G2mR/a1J8e6sTJUGU75oWVCC4DiknNxKuXHmLBaPa3Lqd/yGe95YiUpxO90WE2/bcQq+Tlf7lfsJkqIv6i+qLs8YLZXD6wmKx61AiXfFympb+IAFB0yKshqh5Pae5DQpS0TOZM1KIs5f8DrpmfduCQVfWrXucCiVZdvC2nXSUrbVcaT+2bg+s4KcMttCqCfhpSCHFsmJcg14TkR5aNscrCwzKwcsXqBtufOF41lQcn8B5K7A0u+oYzFnPGy6YvieLkMQ2mvRMnvScvjzqf1U8kevBAt+6a5xhZ0ND3Rf6mnjpcTrdvfE3hiEdhncthoLQvbugAWCAQuCIKmAEHgq0KIdGGuO8k5XPr1SUlZRBdHV/aCF6THSJkwo9tCVhMpNpH2qBaZykA+U46cpmk9jJV/9w2pgapUBG2EneZ6IWHt9ZS+mnhgAvehDfhkAOCWYHRCOYubAgLhQhUiiTIEwQzICS4CMJOU40/KN5urbpH32WAqR5TZ+jnlW6hxtTul8A091izaHCYDye1q1ZTcHjTl9mzryxtifQ0dq4YQxOsKEgYTUxDXIsh0AD28t68HhJYIPJogviHI1/nbD5IyhA2jPey9i8iUHnoW6f0BpJ8a0t/e/QPSDxUXe9JDZ/KK2of2NNROLI5OTN4lH/XpMLwm7JZXVFBu1fp7r8FZc4NOm3CGd/UA+XFbH3Kv1riiydV6L0R9j6g57MLngtMIqJDjd1G5lhzmyr3YKKj0WB1WPgj9BpHcF/ggWILFFMhNcxQ1W4YYRGZcfyes+ssKWVmNtKygmV+hAWKQ7Zln2SUvl0hetpNTz6M/rCB75GyGUfO1fPV4+Y57aiKxEQmG2G+bq8dcGu+OSD/5eN4rEjE/gZmJ5d0RgX7/VPCKRMxDqfdBpE8EOuErIjEPrpMPJOdoft6IWY6KoyExc7v/gcRAgsZDIquXf28aX+tPMLT4BQ==&lt;/diagram&gt;&lt;diagram name=&quot;Home画面&quot; id=&quot;C9qdMeqezxCebSigBSOS&quot;&gt;5ZXPb4IwFMf/Go5LgMrU61C2y04mM9tl6egTGguPlCroX78CRco0WUw0O4wLfZ/3o/T7XopDwqx+lrRIX5GBcHyX1Q5ZOL7vBdNAvxpyMITMZh1JJGeGDWDFj2Cga+iOMyhHgQpRKF6MYYx5DrEaMSolVuOwDYrxrgVN4AysYirO6ZozlXZ07roDfwGepP3Oj70no32wAWVKGVYWIkuHhBJRdausDkE06vW6vL37H7HI2fpzTz0aRDgTk4euWHRNyukIEnJ129J+V3pPxc7oZc6qDr2AEnc5g6aI65CnKuUKVgWNG2+lZ0azVGVCW55eZrinX21mEyyh5EfbRkWVZethA9sGxm1TYLxtN24qm/mw3ObTQSqof/T6F6G8U/f03ANmoORB51UX5iO9OBvUDGVySh6E1wuj/RV9IDfuw4YLEaJA2eaSMIyi+VzzUkncguXxF9PmVDoDc2XxTfv8icp3E3nyf0Tub+ugF/MeqmtzuP1an/UTIctv&lt;/diagram&gt;&lt;/mxfile&gt;">
     <defs/>
     <g>
         <rect x="0" y="0" width="900" height="1600" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
         <rect x="0" y="0" width="900" height="100" fill="#ccff99" stroke="#2d7600" pointer-events="all"/>
         <rect x="0" y="1500" width="900" height="100" fill="#ccff99" stroke="#2d7600" pointer-events="all"/>
-        <rect x="145" y="160" width="610" height="150" fill="none" stroke="none" pointer-events="all"/>
-        <g transform="translate(-0.5 -0.5)">
-            <switch>
-                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 608px; height: 1px; padding-top: 235px; margin-left: 146px;">
-                        <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
-                            <div style="display: inline-block; font-size: 100px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-                                <b>
-                                    ようこそ
-                                </b>
-                            </div>
-                        </div>
-                    </div>
-                </foreignObject>
-                <text x="450" y="265" fill="#000000" font-family="Helvetica" font-size="100px" text-anchor="middle">
-                    ようこそ
-                </text>
-            </switch>
-        </g>
-        <ellipse cx="450" cy="530" rx="200" ry="200" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
-        <g transform="translate(-0.5 -0.5)">
-            <switch>
-                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 398px; height: 1px; padding-top: 530px; margin-left: 251px;">
-                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
-                            <div style="display: inline-block; font-size: 50px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-                                ガマン銀行(ロゴ)
-                            </div>
-                        </div>
-                    </div>
-                </foreignObject>
-                <text x="450" y="545" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="50px" text-anchor="middle">
-                    ガマン銀行(ロゴ)
-                </text>
-            </switch>
-        </g>
     </g>
-    <switch>
-        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
-        <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
-            <text text-anchor="middle" font-size="10px" x="50%" y="100%">
-                Text is not SVG - cannot display
-            </text>
-        </a>
-    </switch>
 </svg>
