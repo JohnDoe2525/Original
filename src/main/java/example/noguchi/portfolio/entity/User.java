@@ -38,7 +38,7 @@ public class User {
             return this.name;
         }
 
-     @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Transaction> transactionList;
 
     }

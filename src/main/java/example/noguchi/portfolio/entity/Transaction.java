@@ -22,14 +22,14 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "reports")
+@Table(name = "transactions")
 @SQLRestriction("delete_flg = false")
 public class Transaction {
 
     // 取引ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer transaction_id;
 
     // 日付
     @NotNull
@@ -47,11 +47,11 @@ public class Transaction {
     @NotEmpty
     @Length(max=100)
     @Column(nullable=true)
-    private String content;
+    private String memo;
 
-    // 社員番号
+    // ユーザーID
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     // 削除フラグ(論理削除を行うため)
