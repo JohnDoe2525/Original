@@ -16,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
@@ -37,11 +38,11 @@ public class User {
         public String getValue() {
             return this.name;
         }
+    }
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Transaction> transactionList;
 
-    }
     // ユーザーID
     @Id
     @Column(length = 10)
@@ -68,6 +69,10 @@ public class User {
     // パスワード
     @Column(length = 255, nullable = false)
     private String password;
+
+    //　パスワード確認用
+    @Transient
+    private String confirmPassword;
 
     // 削除フラグ(論理削除を行うため)
     @Column(columnDefinition="TINYINT", nullable = false)
