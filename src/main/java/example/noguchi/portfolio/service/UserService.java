@@ -16,16 +16,19 @@ import example.noguchi.portfolio.repository.UserRepository;
 public class UserService {
 
     private final UserRepository userRepository;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository,PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // 従業員保存
     @Transactional
     public User save(User user) {
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         user.setRole(Role.GENERAL);
 

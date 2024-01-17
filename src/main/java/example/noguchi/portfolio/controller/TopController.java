@@ -15,7 +15,7 @@ public class TopController {
     // ログイン後のトップページ表示
     @GetMapping(value = "/")
     public String top() {
-        return "redirect:/gamanbanking";
+        return "redirect:/gamanbanking/new";
     }
 
 }
