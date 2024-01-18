@@ -17,31 +17,35 @@
                         <form th:action="@{/gamanbanking/add}" th:object="${user}" th:method="post">
                             <div class="wizard wizard-success mb-4">
                                 <div class="mb-3">
-                                    <label class="form-label" for="name">氏名</label>
+                                    <label class="form-label" for="name">ユーザーネーム</label>
                                     <p class="mb-1"></p>
                                     <div class="col-7">
-                                        <input class="form-control" th:field="*{name}" type="text" id="name">
+                                        <input class="form-control" th:field="*{name}" th:errorclass="err" type="text" id="name">
+                                        <span th:errors="*{name}" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="password">パスワード</label>
                                     <p class="mb-1"></p>
                                     <div class="col-7">
-                                        <input class="form-control" th:field="*{password}" type="password" id="password">
+                                        <input class="form-control" th:field="*{password}" th:errorclass="err" type="password" id="password">
+                                        <span th:errors="*{password}" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="password">パスワード(確認用)</label>
                                     <p class="mb-1"></p>
                                     <div class="col-7">
-                                        <input class="form-control" th:field="*{confirmPassword}" type="password" id="password">
+                                        <input class="form-control" th:field="*{confirmPassword}" th:errorclass="err" type="password" id="password">
+                                        <span th:errors="*{confirmPassword}" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="code">メールアドレス</label>
                                     <p class="mb-1"></p>
                                     <div class="col-7">
-                                        <input class="form-control" th:field="*{mailAddress}" type="text" id="code">
+                                        <input class="form-control" th:field="*{mailAddress}" th:errorclass="err" type="text" id="code">
+                                        <span th:errors="*{mailAddress}" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>

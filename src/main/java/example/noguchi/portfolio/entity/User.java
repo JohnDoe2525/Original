@@ -17,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
@@ -49,14 +50,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // ユーザー名
+    // ユーザーネーム
     @Column(length = 20, nullable = false)
-    @NotEmpty
-    @Length(max = 20)
+    @Length(min=4,max = 20,message="4文字以上20文字以内で入力してください")
     private String name;
 
     // メールアドレス
     @Column(length = 255, nullable = false)
+    @Email
     @NotEmpty
     @Length(max = 100)
     private String mailAddress;
@@ -68,6 +69,7 @@ public class User {
 
     // パスワード
     @Column(length = 255, nullable = false)
+    @Length(min=4,max=10,message="4文字以上10文字以内で入力してください")
     private String password;
 
     //　パスワード確認用

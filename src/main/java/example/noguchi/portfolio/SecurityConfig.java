@@ -20,7 +20,8 @@ public class SecurityConfig {
                 .permitAll() // ログイン画面は未ログインでアクセス可
         ).logout(logout -> logout.logoutSuccessUrl("/login") // ログアウト後のリダイレクト先
         ).authorizeHttpRequests(
-                auth -> auth.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll());
+                auth -> auth.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                .anyRequest().authenticated());
 
         return http.build();
     }
