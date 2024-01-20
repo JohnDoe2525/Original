@@ -7,7 +7,6 @@ import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,11 +36,15 @@ public class Transaction {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate transactionDate;
 
-    // カテゴリ
+    //金額
+    @Column(nullable = false)
     @NotEmpty
-    @Length(max=100)
-    @Column(length = 100,nullable = false)
-    private String category;
+    private Integer price;
+
+    // 商品カテゴリ
+    @ManyToOne
+    @JoinColumn(name = "category_name", referencedColumnName = "name")
+    private Category category;
 
     // メモ
     @NotEmpty
