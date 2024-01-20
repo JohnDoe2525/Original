@@ -19,7 +19,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "categorys")
+@Table(name = "categories")
 @SQLRestriction("delete_flg = false")
 public class Category {
 
@@ -34,7 +34,7 @@ public class Category {
 
     // 商品カテゴリー
     @NotEmpty
-    @Column(length = 20)
+    @Column(length = 20,nullable = false)
     @Max(20)
     private String name;
 

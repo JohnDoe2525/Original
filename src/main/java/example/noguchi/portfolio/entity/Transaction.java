@@ -28,7 +28,7 @@ public class Transaction {
     // 取引ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer transaction_id;
+    private Integer transactionId;
 
     // 日付
     @NotNull
@@ -43,7 +43,7 @@ public class Transaction {
 
     // 商品カテゴリ
     @ManyToOne
-    @JoinColumn(name = "category_name", referencedColumnName = "name")
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
     // メモ
