@@ -2,6 +2,7 @@
 package example.noguchi.portfolio.service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -41,4 +42,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
+//    // 従業員検索
+//    public Optional<User> findByUsername(String username) {
+//        return userRepository.findByName(username);
+//    }
 }

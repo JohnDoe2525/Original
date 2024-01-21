@@ -3,10 +3,33 @@
 
 <head th:replace="common/header :: head_fragment(title=新規登録)"></head>
 
-<body class="h-100 overflow-hidden">
+<body class="overflow-hidden">
     <div class="row h-100  justify-content-center">
         <p>ホーム画面</p>
+        <div class="row h-100  justify-content-center">
+            <p class="welcome" th:text="'ようこそ '+${user}+' さん'"></p>
+        </div>
+        <div class="row h-100  justify-content-center">
+            <p>残高</p>
+        </div>
+        <div class="row h-100  justify-content-center">
+            <p>金額入力</p>
+        </div>
+        <div class="row h-100  justify-content-center">
+            <p>カテゴリ選択</p>
+        </div>
+        <div class="row h-100  justify-content-center">
+            <p>メモ</p>
+        </div>
+        <div class="row h-100  justify-content-center">
+            <p>入金ボタン</p>
+        </div>
+        <div class="row h-100  justify-content-center">
+            <p>フッターボタン</p>
+        </div>
     </div>
+
+
 </body>
 
 </html>

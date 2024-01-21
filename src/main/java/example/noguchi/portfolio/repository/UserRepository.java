@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import example.noguchi.portfolio.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
-    Optional<User> findByName(String name);
+    Optional<User> findByName(String username);
 }
