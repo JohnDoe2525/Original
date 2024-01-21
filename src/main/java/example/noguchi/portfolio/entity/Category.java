@@ -23,7 +23,7 @@ import lombok.Data;
 @SQLRestriction("delete_flg = false")
 public class Category {
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category")
     private List<Transaction> transactionList;
 
     // カテゴリーID

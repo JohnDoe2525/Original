@@ -31,14 +31,12 @@ public class Transaction {
     private Integer transactionId;
 
     // 日付
-    @NotNull
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate transactionDate;
+    private LocalDateTime transactionDate;
 
     //金額
     @Column(nullable = false)
-    @NotEmpty
+    @NotNull
     private Integer price;
 
     // 商品カテゴリ
@@ -47,7 +45,6 @@ public class Transaction {
     private Category category;
 
     // メモ
-    @NotEmpty
     @Length(max=100)
     @Column(nullable=true)
     private String memo;

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import example.noguchi.portfolio.entity.Transaction;
 import example.noguchi.portfolio.entity.User;
+import example.noguchi.portfolio.service.CategoryService;
+import example.noguchi.portfolio.service.TransactionService;
 import example.noguchi.portfolio.service.UserDetail;
 import example.noguchi.portfolio.service.UserService;
 
@@ -21,10 +23,39 @@ import example.noguchi.portfolio.service.UserService;
 @RequestMapping("gamanbanking")
 public class TransactionController {
 
+    private final TransactionService transactionService;
+    private final CategoryService categoryService;
+
+    @Autowired
+    public TransactionController(TransactionService transactionService,CategoryService categoryService) {
+        this.transactionService = transactionService;
+        this.categoryService = categoryService;
+    }
+
     // ホーム画面を表示
     @GetMapping(value = "/home")
-    public String home(Model model,@AuthenticationPrincipal UserDetail userDetail) {
-        model.addAttribute("user", userDetail.getUsername());
+    public String home(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction) {
+        // ユーザーネーム表示用
+        model.addAttribute("loginUser", userDetail.getEmployee());
+        // ユーザーの残高表示用
+        Integer userId = userDetail.getEmployee().getId();
+        model.addAttribute("totalBalance", transactionService.getTotalBalance(userId));
+        // カテゴリ選択用リスト
+        model.addAttribute("categoryList",categoryService.getAllCategory());
+
         return "transaction/home";
+
+    }
+
+    @PostMapping(value = "/home/add")
+    public String create(Model model,@Validated Transaction transaction,BindingResult res,@AuthenticationPrincipal UserDetail userDetail) {
+
+        if (res.hasErrors()) {
+            return home(model,userDetail,transaction);
+        }
+        // 入金処理呼び出し
+        transaction.setUser(userDetail.getEmployee());
+        transactionService.save(transaction);
+        return "redirect:/gamanbanking/home";
     }
 }

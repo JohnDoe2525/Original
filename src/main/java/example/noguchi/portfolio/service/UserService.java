@@ -30,11 +30,8 @@ public class UserService {
     public User save(User user) {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
         user.setRole(Role.GENERAL);
-
         user.setDeleteFlg(false);
-
         LocalDateTime now = LocalDateTime.now();
         user.setCreatedAt(now);
         user.setUpdatedAt(now);

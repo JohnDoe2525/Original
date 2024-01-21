@@ -12,12 +12,12 @@ import example.noguchi.portfolio.entity.Category;
 import example.noguchi.portfolio.repository.CategoryRepository;
 
 @Service
-public class CategoyService {
+public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
     @Autowired
-    public CategoyService(CategoryRepository categoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 

@@ -41,7 +41,7 @@ public class User {
         }
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Transaction> transactionList;
 
     // ユーザーID
