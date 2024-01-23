@@ -1,11 +1,9 @@
 package example.noguchi.portfolio.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,8 +13,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 @Data
@@ -36,7 +35,9 @@ public class Transaction {
 
     //金額
     @Column(nullable = false)
-    @NotNull
+    @NotNull(message="金額を入力してください。")
+    @Positive(message="金額を正しく入力してください。")
+    @Max(value=999999999,message="金額が大きすぎます。")
     private Integer price;
 
     // 商品カテゴリ
