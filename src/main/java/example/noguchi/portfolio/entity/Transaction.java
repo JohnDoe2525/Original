@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -37,8 +38,8 @@ public class Transaction {
     //金額
     @Column(nullable = false)
     @NotNull(message="金額を入力してください。")
-    @Positive(message="金額を正しく入力してください。")
     @Max(value=999999999,message="金額が大きすぎます。")
+    @Min(value=-999999999,message="金額が少なすぎます。")
     private Integer price;
 
     // 商品カテゴリ

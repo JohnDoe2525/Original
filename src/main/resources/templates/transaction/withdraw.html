@@ -5,7 +5,7 @@
 
 <body class="overflow-hidden">
     <div class="row h-100  justify-content-center">
-        <p>ホーム/入金</p>
+        <p>出金</p>
         <div class="row h-100  justify-content-center">
             <p class="welcome" th:text="'ようこそ '+${loginUser.name}+' さん'"></p>
         </div>
@@ -14,10 +14,10 @@
         </div>
         <div class="row h-100  justify-content-center">
             <div class="card-body">
-                <form th:action="@{/gamanbanking/home/add}" th:method="post"　th:object="${transaction}">
+                <form th:action="@{/gamanbanking/home/withdraw/add}" th:method="post"　th:object="${transaction}">
                     <div class="wizard wizard-success mb-4">
                         <div class="mb-3">
-                            <label class="form-label" for="price">入金額を入力してください</label>
+                            <label class="form-label" for="price">出金額を入力してください</label>
                             <p class="mb-1"></p>
                             <div class="col-md-7">
                                 <input class="form-control" type="number" th:field="*{price}" th:errorclass="err" id="price" maxlength="9">
@@ -46,11 +46,11 @@
                         </div>
                     </div>
                     <p class="mt-5">
-                        <input type="submit" value="入金する" class="btn btn-primary">
+                        <input type="submit" value="出金する" class="btn btn-primary">
                     </p>
                     以下、横並びメニューで実装予定
                     <p class="mt-5">
-                        <a th:href="@{/gamanbanking/home/withdraw}" class="btn btn-primary">出金</a>
+                        <a th:href="@{/gamanbanking/home}" class="btn btn-primary">ホーム</a>
                     </p>
                 </form>
             </div>

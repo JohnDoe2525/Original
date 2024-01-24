@@ -37,9 +37,9 @@ public class TransactionController {
     public String home(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction) {
         // ユーザーネーム表示用
         model.addAttribute("loginUser", userDetail.getEmployee());
-        // ユーザーの残高表示用
+        // ユーザーの残高表示用＆桁区切り変換
         Integer userId = userDetail.getEmployee().getId();
-        Integer totalBalance = transactionService.getTotalBalance(userId);
+        String totalBalance = String.format("%,d円",transactionService.getTotalBalance(userId));
         if (totalBalance == null) {
             model.addAttribute("totalBalance", 0);
         } else {
@@ -47,13 +47,13 @@ public class TransactionController {
         }
         // カテゴリ選択用リスト
         model.addAttribute("categoryList",categoryService.getAllCategory());
-        
+
         return "transaction/home";
 
     }
 
     @PostMapping(value = "/home/add")
-    public String create(Model model,@Validated Transaction transaction,BindingResult res,@AuthenticationPrincipal UserDetail userDetail) {
+    public String deposit(Model model,@Validated Transaction transaction,BindingResult res,@AuthenticationPrincipal UserDetail userDetail) {
         // 入力チェック
         if(res.hasErrors()) {
             return home(model,userDetail,transaction);
@@ -71,6 +71,51 @@ public class TransactionController {
             return home(model,userDetail,transaction);
         }
         // 入金処理呼び出し
+        transaction.setUser(userDetail.getEmployee());
+        transactionService.save(transaction);
+        return "redirect:/gamanbanking/home";
+    }
+
+ // ホーム画面を表示
+    @GetMapping(value = "/home/withdraw")
+    public String withdrawView(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction) {
+        // ユーザーネーム表示用
+        model.addAttribute("loginUser", userDetail.getEmployee());
+        // ユーザーの残高表示用＆桁区切り変換
+        Integer userId = userDetail.getEmployee().getId();
+        String totalBalance = String.format("%,d円",transactionService.getTotalBalance(userId));
+        if (totalBalance == null) {
+            model.addAttribute("totalBalance", 0);
+        } else {
+            model.addAttribute("totalBalance", totalBalance);
+        }
+        // カテゴリ選択用リスト
+        model.addAttribute("categoryList",categoryService.getAllCategory());
+
+        return "transaction/withdraw";
+
+    }
+    @PostMapping(value = "/home/withdraw/add")
+    public String withdraw(Model model,@Validated Transaction transaction,BindingResult res,@AuthenticationPrincipal UserDetail userDetail) {
+        // 入力金額を負の値に
+        transaction.setPrice(transaction.getPrice()*-1);
+        // 入力チェック
+        if(res.hasErrors()) {
+            return home(model,userDetail,transaction);
+        }
+        // 残高下限チェック
+        Integer userId = userDetail.getEmployee().getId();
+        Integer totalBalance = transactionService.getTotalBalance(userId);
+        if(totalBalance + transaction.getPrice() < 0) {
+            model.addAttribute("limitError","残高が足りません");
+            return home(model,userDetail,transaction);
+        }
+        // カテゴリー未選択エラー
+        if(transaction.getCategory().getId() == null) {
+            model.addAttribute("categoryError","カテゴリーを選択してください");
+            return home(model,userDetail,transaction);
+        }
+        // 出金処理呼び出し(入金と同じ)
         transaction.setUser(userDetail.getEmployee());
         transactionService.save(transaction);
         return "redirect:/gamanbanking/home";
