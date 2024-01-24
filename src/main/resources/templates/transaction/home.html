@@ -20,8 +20,9 @@
                             <label class="form-label" for="price">金額入力</label>
                             <p class="mb-1"></p>
                             <div class="col-md-7">
-                                <input class="form-control" type="text" th:field="*{price}" th:errorclass="err" id="price">
+                                <input class="form-control" type="number" th:field="*{price}" th:errorclass="err" id="price" maxlength="9">
                                 <span th:errors="*{price}" class="text-danger"></span>
+                                <span th:if="${limitError != null}" th:text="${limitError}" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -29,9 +30,10 @@
                             <p class="mb-1"></p>
                             <div class="col-md-7">
                                 <select th:field="*{category.id}">
-                                    <option class="form-control" value="" th:text="選択してください"></option>
+                                    <option class="form-control" value=""　th:text="選択してください"></option>
                                     <option class="form-control" th:each="item:${categoryList}" th:value="${item.id}" th:text="${item.name}" id="category"></option>
                                 </select>
+                                <span th:if="${categoryError != null}" th:text="${categoryError}" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="mb-3">

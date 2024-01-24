@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
@@ -43,6 +44,7 @@ public class Transaction {
     // 商品カテゴリ
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @NotNull
     private Category category;
 
     // メモ
