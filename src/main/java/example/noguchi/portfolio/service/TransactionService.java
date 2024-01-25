@@ -2,6 +2,7 @@
 package example.noguchi.portfolio.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,9 @@ public class TransactionService {
         return transactionRepository.save(transaction);
 
     }
-
+    
+    // ユーザーの全取引を取得
+    public List<Transaction> findAllById(Integer id){
+        return transactionRepository.findAllById(null);
+    }
 }

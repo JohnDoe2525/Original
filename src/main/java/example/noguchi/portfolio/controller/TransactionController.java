@@ -1,5 +1,7 @@
 package example.noguchi.portfolio.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -56,6 +58,7 @@ public class TransactionController {
     public String deposit(Model model,@Validated Transaction transaction,BindingResult res,@AuthenticationPrincipal UserDetail userDetail) {
         // 入力チェック
         if(res.hasErrors()) {
+
             return home(model,userDetail,transaction);
         }
         // 残高上限チェック
@@ -63,20 +66,23 @@ public class TransactionController {
         Integer totalBalance = transactionService.getTotalBalance(userId);
         if(totalBalance + transaction.getPrice() > 999999999) {
             model.addAttribute("limitError","残高が上限に達しています");
+
             return home(model,userDetail,transaction);
         }
         // カテゴリー未選択エラー
         if(transaction.getCategory().getId() == null) {
             model.addAttribute("categoryError","カテゴリーを選択してください");
+
             return home(model,userDetail,transaction);
         }
         // 入金処理呼び出し
         transaction.setUser(userDetail.getEmployee());
         transactionService.save(transaction);
-        return "redirect:/gamanbanking/home";
+
+        return "redirect:/gamanbanking/home/notice";
     }
 
- // ホーム画面を表示
+    // 出金画面を表示
     @GetMapping(value = "/home/withdraw")
     public String withdrawView(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction) {
         // ユーザーネーム表示用
@@ -100,6 +106,7 @@ public class TransactionController {
 
         // 入力チェック
         if(res.hasErrors()) {
+
             return home(model,userDetail,transaction);
         }
         // 残高下限チェック
@@ -107,17 +114,40 @@ public class TransactionController {
         Integer totalBalance = transactionService.getTotalBalance(userId);
         if(totalBalance + transaction.getPrice() < -999999999) {
             model.addAttribute("limitError","残高が下限に達しています");
+
             return home(model,userDetail,transaction);
         }
         // カテゴリー未選択エラー
         if(transaction.getCategory().getId() == null) {
             model.addAttribute("categoryError","カテゴリーを選択してください");
+
             return home(model,userDetail,transaction);
         }
         // 出金処理呼び出し(金額を負の値に)
         transaction.setPrice(transaction.getPrice()*-1);
         transaction.setUser(userDetail.getEmployee());
         transactionService.save(transaction);
-        return "redirect:/gamanbanking/home/withdraw";
+
+        return "redirect:/gamanbanking/home/notice";
+    }
+    @GetMapping(value = "/home/notice")
+    public String notice(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction) {
+     // ユーザーネーム表示用
+        model.addAttribute("loginUser", userDetail.getEmployee());
+        // ユーザーの残高表示用＆桁区切り変換
+        Integer userId = userDetail.getEmployee().getId();
+        String totalBalance = String.format("%,d円",transactionService.getTotalBalance(userId));
+        model.addAttribute("totalBalance", totalBalance);
+
+//        List<Transaction> tranListByUser = transactionService.findAllById(userId);
+//        Integer recentlyPrice = tranListByUser.get(tranListByUser.size()-1).getPrice();
+//        
+//        if(recentlyPrice > 0) {
+//            model.addAttribute("result", "入金が完了しました！");
+//        } else {
+//            model.addAttribute("result", "出金が完了しました");
+//        }
+
+        return "transaction/notice";
     }
 }

@@ -5,7 +5,6 @@
 
 <body class="overflow-hidden">
     <div class="row h-100  justify-content-center">
-        <p>出金</p>
         <div class="row h-100  justify-content-center">
             <p class="welcome" th:text="'ようこそ '+${loginUser.name}+' さん'"></p>
         </div>
@@ -19,7 +18,7 @@
                         <div class="mb-3">
                             <label class="form-label" for="price">出金額を入力してください</label>
                             <p class="mb-1"></p>
-                            <div class="col-md-7">
+                            <div class="col-md-5">
                                 <input class="form-control" type="text" th:field="*{price}" th:errorclass="err" id="price" maxlength="9">
                                 <span th:errors="*{price}" class="text-danger"></span>
                                 <span th:if="${limitError != null}" th:text="${limitError}" class="text-danger"></span>
@@ -39,21 +38,21 @@
                         <div class="mb-3">
                             <label class="form-label" for="memo">メモ</label>
                             <p class="mb-1"></p>
-                            <div class="col-md-10">
-                                <textarea class="form-control" style="resize: both; height: 300px;" type="text" th:field="*{memo}" th:errorclass="err" id="memo"></textarea>
+                            <div class="col-md-5">
+                                <input class="form-control" type="text" th:field="*{memo}" th:errorclass="err" id="memo"></input>
                                 <span th:errors="*{memo}" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
-                    <p class="mt-5">
+                    <p class="mt-2">
                         <input type="submit" value="出金する" class="btn btn-primary">
-                    </p>
-                    以下、横並びメニューで実装予定
-                    <p class="mt-5">
-                        <a th:href="@{/gamanbanking/home}" class="btn btn-primary">ホーム</a>
                     </p>
                 </form>
             </div>
+            <p class="mt-2">
+                <a th:href="@{/gamanbanking/home}" class="btn btn-primary">ホーム</a>
+                <a th:href="@{/gamanbanking/home/withdraw}" class="btn btn-primary">出金</a>
+            </p>
         </div>
     </div>
 </body>

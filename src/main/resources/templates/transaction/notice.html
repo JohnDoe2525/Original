@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: head_fragment(title=新規登録)"></head>
+
+<body class="overflow-hidden">
+    <div class="row h-100  justify-content-center">
+        <div class="row h-100  justify-content-center">
+            <p class="welcome" th:text="'ようこそ '+${loginUser.name}+' さん'"></p>
+        </div>
+        <div class="row h-100  justify-content-center">
+            <p class="totalBalance" th:text="'残高 : '+${totalBalance}"></p>
+        </div>
+        
+        <div>
+            <p class="mt-2">
+                <a th:href="@{/gamanbanking/home}" class="btn btn-primary">ホームに戻る</a>
+            </p>
+        </div>
+        <div class="row h-100  justify-content-center">
+            <p class="mt-2">
+                <a th:href="@{/gamanbanking/home}" class="btn btn-primary">ホーム</a>
+                <a th:href="@{/gamanbanking/home/withdraw}" class="btn btn-primary">出金</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
