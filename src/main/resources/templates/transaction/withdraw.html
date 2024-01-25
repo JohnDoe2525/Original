@@ -20,7 +20,7 @@
                             <label class="form-label" for="price">出金額を入力してください</label>
                             <p class="mb-1"></p>
                             <div class="col-md-7">
-                                <input class="form-control" type="number" th:field="*{price}" th:errorclass="err" id="price" maxlength="9">
+                                <input class="form-control" type="text" th:field="*{price}" th:errorclass="err" id="price" maxlength="9">
                                 <span th:errors="*{price}" class="text-danger"></span>
                                 <span th:if="${limitError != null}" th:text="${limitError}" class="text-danger"></span>
                             </div>

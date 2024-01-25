@@ -97,8 +97,7 @@ public class TransactionController {
     }
     @PostMapping(value = "/home/withdraw/add")
     public String withdraw(Model model,@Validated Transaction transaction,BindingResult res,@AuthenticationPrincipal UserDetail userDetail) {
-        // 入力金額を負の値に
-        transaction.setPrice(transaction.getPrice()*-1);
+
         // 入力チェック
         if(res.hasErrors()) {
             return home(model,userDetail,transaction);
@@ -106,8 +105,8 @@ public class TransactionController {
         // 残高下限チェック
         Integer userId = userDetail.getEmployee().getId();
         Integer totalBalance = transactionService.getTotalBalance(userId);
-        if(totalBalance + transaction.getPrice() < 0) {
-            model.addAttribute("limitError","残高が足りません");
+        if(totalBalance + transaction.getPrice() < -999999999) {
+            model.addAttribute("limitError","残高が下限に達しています");
             return home(model,userDetail,transaction);
         }
         // カテゴリー未選択エラー
@@ -115,9 +114,10 @@ public class TransactionController {
             model.addAttribute("categoryError","カテゴリーを選択してください");
             return home(model,userDetail,transaction);
         }
-        // 出金処理呼び出し(入金と同じ)
+        // 出金処理呼び出し(金額を負の値に)
+        transaction.setPrice(transaction.getPrice()*-1);
         transaction.setUser(userDetail.getEmployee());
         transactionService.save(transaction);
-        return "redirect:/gamanbanking/home";
+        return "redirect:/gamanbanking/home/withdraw";
     }
 }
