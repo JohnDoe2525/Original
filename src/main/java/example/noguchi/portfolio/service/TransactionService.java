@@ -2,12 +2,15 @@
 package example.noguchi.portfolio.service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import example.noguchi.portfolio.entity.Transaction;
+import example.noguchi.portfolio.entity.User;
 import example.noguchi.portfolio.repository.TransactionRepository;
 import jakarta.transaction.Transactional;
 
@@ -36,9 +39,16 @@ public class TransactionService {
         return transactionRepository.save(transaction);
 
     }
-    
     // ユーザーの全取引を取得
-    public List<Transaction> findAllById(Integer id){
-        return transactionRepository.findAllById(null);
+    public List<Transaction> findByUser(User user){
+        return transactionRepository.findByUser(user);
+    }
+    public HashMap<Integer,Integer> getTransactionBalance(User user){
+        List<Transaction> transactionList = findByUser(user);
+        HashMap<Integer,Integer> balanceList = new HashMap<>();
+        for (Transaction transaction: transactionList){
+            balanceList.put(transaction.getTransactionId(), transaction.getPrice());
+        }
+        return balanceList;
     }
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: head_fragment(title=新規登録)"></head>
+
+<body class="overflow-hidden">
+    <div class="row h-100  justify-content-center">
+        <div class="row h-100  justify-content-center">
+            <p class="welcome" th:text="${loginUser.name}+' さんの通帳'"></p>
+        </div>
+        <div class="row h-100  justify-content-center">
+            <div class="card-body">
+                <table class="table table-striped w-50">
+                    <thead>
+                        <tr>
+                            <th>日付</th>
+                            <th>カテゴリ</th>
+                            <th>金額</th>
+                            <th>残高</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="tran : ${transactionList}">
+                            <td th:text="${#temporals.format(tran.transactionDate,'yyyy-MM-dd')}"></td>
+                            <td th:text="${tran.category.name}"></td>
+                            <td th:text="${tran.price}"></td>
+                            <td th:text="1">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-2">
+                <a th:href="@{/gamanbanking/home}" class="btn btn-primary">ホーム</a>
+                <a th:href="@{/gamanbanking/home/withdraw}" class="btn btn-primary">出金</a>
+                <a th:href="@{/gamanbanking/home/list}" class="btn btn-primary">通帳</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

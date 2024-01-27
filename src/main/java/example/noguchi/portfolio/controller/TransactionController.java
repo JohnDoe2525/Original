@@ -141,7 +141,7 @@ public class TransactionController {
 
 //        List<Transaction> tranListByUser = transactionService.findAllById(userId);
 //        Integer recentlyPrice = tranListByUser.get(tranListByUser.size()-1).getPrice();
-//        
+//
 //        if(recentlyPrice > 0) {
 //            model.addAttribute("result", "入金が完了しました！");
 //        } else {
@@ -149,5 +149,12 @@ public class TransactionController {
 //        }
 
         return "transaction/notice";
+    }
+    @GetMapping(value = "/home/list")
+    public String list(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction) {
+        User user = userDetail.getEmployee();
+        model.addAttribute("loginUser", userDetail.getEmployee());
+        model.addAttribute("transactionList", transactionService.findByUser(user));
+        return "transaction/list";
     }
 }
