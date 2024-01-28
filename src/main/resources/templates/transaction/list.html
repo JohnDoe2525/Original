@@ -20,11 +20,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="tran : ${transactionList}">
+                        <tr th:each="tran,status : ${transactionList}">
                             <td th:text="${#temporals.format(tran.transactionDate,'yyyy-MM-dd')}"></td>
                             <td th:text="${tran.category.name}"></td>
                             <td th:text="${tran.price}"></td>
-                            <td th:text="1">
+                            <td>
+                                <span th:text="${balanceList[status.index]}"></span>
                             </td>
                         </tr>
                     </tbody>

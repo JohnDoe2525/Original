@@ -41,12 +41,7 @@ public class TransactionController {
         model.addAttribute("loginUser", userDetail.getEmployee());
         // ユーザーの残高表示用＆桁区切り変換
         Integer userId = userDetail.getEmployee().getId();
-        String totalBalance = String.format("%,d円",transactionService.getTotalBalance(userId));
-        if (totalBalance == null) {
-            model.addAttribute("totalBalance", 0);
-        } else {
-            model.addAttribute("totalBalance", totalBalance);
-        }
+        model.addAttribute("totalBalance", String.format("%,d円",transactionService.getTotalBalance(userId)));
         // カテゴリ選択用リスト
         model.addAttribute("categoryList",categoryService.getAllCategory());
 
@@ -155,6 +150,8 @@ public class TransactionController {
         User user = userDetail.getEmployee();
         model.addAttribute("loginUser", userDetail.getEmployee());
         model.addAttribute("transactionList", transactionService.findByUser(user));
+        model.addAttribute("balanceList",transactionService.getTransactionBalance(user));
+
         return "transaction/list";
     }
 }

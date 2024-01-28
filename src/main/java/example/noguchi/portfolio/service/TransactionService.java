@@ -2,6 +2,7 @@
 package example.noguchi.portfolio.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,9 @@ public class TransactionService {
     }
     // ユーザーの残高を取得
     public Integer getTotalBalance(Integer id) {
-        return transactionRepository.getTotalBalance(id);
+        Integer totalBalance = transactionRepository.getTotalBalance(id);
+        totalBalance = (totalBalance == null) ? 0 : totalBalance; 
+        return totalBalance;
     }
     // 入金処理
     @Transactional
@@ -43,11 +46,14 @@ public class TransactionService {
     public List<Transaction> findByUser(User user){
         return transactionRepository.findByUser(user);
     }
-    public HashMap<Integer,Integer> getTransactionBalance(User user){
+    // ユーザーの取引時点の残高を取得してリストに格納
+    public List<Integer> getTransactionBalance(User user){
         List<Transaction> transactionList = findByUser(user);
-        HashMap<Integer,Integer> balanceList = new HashMap<>();
+        List<Integer> balanceList = new ArrayList<>();
+        Integer totalPrice = 0;
         for (Transaction transaction: transactionList){
-            balanceList.put(transaction.getTransactionId(), transaction.getPrice());
+            totalPrice += transaction.getPrice();
+            balanceList.add(totalPrice);
         }
         return balanceList;
     }
