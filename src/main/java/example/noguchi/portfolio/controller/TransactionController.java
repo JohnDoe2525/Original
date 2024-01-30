@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import example.noguchi.portfolio.entity.Transaction;
 import example.noguchi.portfolio.entity.User;
@@ -20,6 +21,8 @@ import example.noguchi.portfolio.service.CategoryService;
 import example.noguchi.portfolio.service.TransactionService;
 import example.noguchi.portfolio.service.UserDetail;
 import example.noguchi.portfolio.service.UserService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @Controller
 @RequestMapping("gamanbanking")
@@ -36,7 +39,7 @@ public class TransactionController {
 
     // ホーム画面を表示
     @GetMapping(value = "/home")
-    public String home(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction) {
+    public String home(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction,@ModelAttribute("message") String message) {
         // ユーザーネーム表示用
         model.addAttribute("loginUser", userDetail.getEmployee());
         // ユーザーの残高表示用＆桁区切り変換
@@ -44,17 +47,17 @@ public class TransactionController {
         model.addAttribute("totalBalance", String.format("%,d円",transactionService.getTotalBalance(userId)));
         // カテゴリ選択用リスト
         model.addAttribute("categoryList",categoryService.getAllCategory());
-
+        model.addAttribute("message", message);
         return "transaction/home";
 
     }
 
     @PostMapping(value = "/home/add")
-    public String deposit(Model model,@Validated Transaction transaction,BindingResult res,@AuthenticationPrincipal UserDetail userDetail) {
+    public String deposit(Model model,@Validated Transaction transaction,BindingResult res,@AuthenticationPrincipal UserDetail userDetail,RedirectAttributes redirectAttributes) {
         // 入力チェック
         if(res.hasErrors()) {
 
-            return home(model,userDetail,transaction);
+            return home(model,userDetail,transaction,null);
         }
         // 残高上限チェック
         Integer userId = userDetail.getEmployee().getId();
@@ -62,19 +65,19 @@ public class TransactionController {
         if(totalBalance + transaction.getPrice() > 999999999) {
             model.addAttribute("limitError","残高が上限に達しています");
 
-            return home(model,userDetail,transaction);
+            return home(model,userDetail,transaction,null);
         }
         // カテゴリー未選択エラー
         if(transaction.getCategory().getId() == null) {
             model.addAttribute("categoryError","カテゴリーを選択してください");
 
-            return home(model,userDetail,transaction);
+            return home(model,userDetail,transaction,null);
         }
         // 入金処理呼び出し
         transaction.setUser(userDetail.getEmployee());
         transactionService.save(transaction);
-
-        return "redirect:/gamanbanking/home/notice";
+        redirectAttributes.addFlashAttribute("message", "popup");
+        return "redirect:/gamanbanking/home";
     }
 
     // 出金画面を表示
@@ -102,7 +105,7 @@ public class TransactionController {
         // 入力チェック
         if(res.hasErrors()) {
 
-            return home(model,userDetail,transaction);
+            return home(model,userDetail,transaction,null);
         }
         // 残高下限チェック
         Integer userId = userDetail.getEmployee().getId();
@@ -110,20 +113,20 @@ public class TransactionController {
         if(totalBalance + transaction.getPrice() < -999999999) {
             model.addAttribute("limitError","残高が下限に達しています");
 
-            return home(model,userDetail,transaction);
+            return home(model,userDetail,transaction,null);
         }
         // カテゴリー未選択エラー
         if(transaction.getCategory().getId() == null) {
             model.addAttribute("categoryError","カテゴリーを選択してください");
 
-            return home(model,userDetail,transaction);
+            return home(model,userDetail,transaction,null);
         }
         // 出金処理呼び出し(金額を負の値に)
         transaction.setPrice(transaction.getPrice()*-1);
         transaction.setUser(userDetail.getEmployee());
         transactionService.save(transaction);
 
-        return "redirect:/gamanbanking/home/notice";
+        return "redirect:/gamanbanking/home";
     }
     @GetMapping(value = "/home/notice")
     public String notice(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction) {
