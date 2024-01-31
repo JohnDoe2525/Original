@@ -76,7 +76,7 @@ public class TransactionController {
         // 入金処理呼び出し
         transaction.setUser(userDetail.getEmployee());
         transactionService.save(transaction);
-        redirectAttributes.addFlashAttribute("message", "popup");
+        redirectAttributes.addFlashAttribute("message", "入金が完了しました");
         return "redirect:/gamanbanking/home";
     }
 
