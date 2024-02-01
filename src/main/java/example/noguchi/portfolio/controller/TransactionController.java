@@ -100,7 +100,7 @@ public class TransactionController {
 
     }
     @PostMapping(value = "/home/withdraw/add")
-    public String withdraw(Model model,@Validated Transaction transaction,BindingResult res,@AuthenticationPrincipal UserDetail userDetail) {
+    public String withdraw(Model model,@Validated Transaction transaction,BindingResult res,@AuthenticationPrincipal UserDetail userDetail,RedirectAttributes redirectAttributes) {
 
         // 入力チェック
         if(res.hasErrors()) {
@@ -125,7 +125,7 @@ public class TransactionController {
         transaction.setPrice(transaction.getPrice()*-1);
         transaction.setUser(userDetail.getEmployee());
         transactionService.save(transaction);
-
+        redirectAttributes.addFlashAttribute("message", "出金が完了しました");
         return "redirect:/gamanbanking/home";
     }
     @GetMapping(value = "/home/notice")
