@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,11 +31,13 @@ public class TransactionController {
 
     private final TransactionService transactionService;
     private final CategoryService categoryService;
+    private final UserService userService;
 
     @Autowired
-    public TransactionController(TransactionService transactionService,CategoryService categoryService) {
+    public TransactionController(TransactionService transactionService,CategoryService categoryService,UserService userService) {
         this.transactionService = transactionService;
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     // ホーム画面を表示
@@ -51,7 +54,7 @@ public class TransactionController {
         return "transaction/home";
 
     }
-
+    // 入金処理
     @PostMapping(value = "/home/add")
     public String deposit(Model model,@Validated Transaction transaction,BindingResult res,@AuthenticationPrincipal UserDetail userDetail,RedirectAttributes redirectAttributes) {
         // 入力チェック
@@ -99,6 +102,7 @@ public class TransactionController {
         return "transaction/withdraw";
 
     }
+    // 出金処理
     @PostMapping(value = "/home/withdraw/add")
     public String withdraw(Model model,@Validated Transaction transaction,BindingResult res,@AuthenticationPrincipal UserDetail userDetail,RedirectAttributes redirectAttributes) {
 
@@ -126,35 +130,52 @@ public class TransactionController {
         transaction.setUser(userDetail.getEmployee());
         transactionService.save(transaction);
         redirectAttributes.addFlashAttribute("message", "出金が完了しました");
+
         return "redirect:/gamanbanking/home";
     }
-    @GetMapping(value = "/home/notice")
-    public String notice(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction) {
-     // ユーザーネーム表示用
-        model.addAttribute("loginUser", userDetail.getEmployee());
-        // ユーザーの残高表示用＆桁区切り変換
-        Integer userId = userDetail.getEmployee().getId();
-        String totalBalance = String.format("%,d円",transactionService.getTotalBalance(userId));
-        model.addAttribute("totalBalance", totalBalance);
-
-//        List<Transaction> tranListByUser = transactionService.findAllById(userId);
-//        Integer recentlyPrice = tranListByUser.get(tranListByUser.size()-1).getPrice();
-//
-//        if(recentlyPrice > 0) {
-//            model.addAttribute("result", "入金が完了しました！");
-//        } else {
-//            model.addAttribute("result", "出金が完了しました");
-//        }
-
-        return "transaction/notice";
-    }
+    // 通帳画面表示
     @GetMapping(value = "/home/list")
-    public String list(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction) {
+    public String list(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction,@ModelAttribute("message") String message) {
         User user = userDetail.getEmployee();
         model.addAttribute("loginUser", userDetail.getEmployee());
         model.addAttribute("transactionList", transactionService.findByUser(user));
         model.addAttribute("balanceList",transactionService.getTransactionBalance(user));
+        model.addAttribute("message", message);
 
         return "transaction/list";
+    }
+    // 編集画面
+    @GetMapping(value = "/home/detail/{id}")
+    public String detail(@PathVariable("id") Integer id,Model model,@ModelAttribute Transaction transaction) {
+        model.addAttribute("categoryList",categoryService.getAllCategory());
+        if(id == null) {
+            model.addAttribute("transaction", transaction);
+        } else {
+            model.addAttribute("transaction",transactionService.findById(id).get());
+        }
+        return "transaction/detail";
+    }
+    // 更新処理
+    @PostMapping(value = "/home/update/{id}")
+    public String update(@PathVariable("id") Integer id,Model model,@Validated Transaction transaction,BindingResult res,@AuthenticationPrincipal UserDetail userDetail,RedirectAttributes redirectAttributes) {
+
+        // 入力チェック
+        if(res.hasErrors()) {
+
+            return detail(null,model,transaction);
+        }
+        // 残高下限チェック
+        Integer userId = userDetail.getEmployee().getId();
+        Integer totalBalance = transactionService.getTotalBalance(userId);
+        Integer target = totalBalance + transaction.getPrice();
+        if(target < -999999999 || target > 999999999) {
+            model.addAttribute("limitError","残高が制限に達しています");
+
+            return detail(id,model,transaction);
+        }
+        redirectAttributes.addFlashAttribute("message", "変更が完了しました");
+        transactionService.update(id,transaction);
+
+        return "redirect:/gamanbanking/home/list";
     }
 }

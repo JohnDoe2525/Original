@@ -7,7 +7,36 @@
     <title th:text="ホーム"></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/popup.css}">
+    <script th:inline="javascript">document.addEventListener('DOMContentLoaded', function () {
+            // サーバーからメッセージを取得
+            const serverMessage = /*[[${message}]]*/ null;
+            const popupWrapper = document.getElementById('popup-wrapper');
+            const close = document.getElementById('close');
+            // メッセージがあればポップアップを表示
+            if (serverMessage) {
+                // ポップアップにメッセージを表示する処理
+                // document.getElementById('message').innerHTML = "<h2>" + serverMessage + "</h2>";
+                // ポップアップを表示
+                showPopup();
+            }
+            // ポップアップを表示する関数
+            function showPopup() {
+                document.getElementById('popup-wrapper').style.display = 'block';
+            }
+            popupWrapper.addEventListener('click', e => {
+                if (e.target.id === popupWrapper.id || e.target.id === close.id || e.target.id === OK.id) {
+                    popupWrapper.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </head>
 
 <body class="overflow-hidden">
@@ -24,6 +53,7 @@
                             <th>カテゴリ</th>
                             <th>金額</th>
                             <th>残高</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,6 +64,7 @@
                             <td>
                                 <span th:text="${balanceList[status.index]}"></span>
                             </td>
+                            <td><a th:href="@{/gamanbanking/home/detail/{id}(id=${tran.transactionId})}">編集</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -45,6 +76,18 @@
             </p>
         </div>
     </div>
+    <div id="popup-wrapper" th:if="${message != null}">
+        <div id="popup-inside">
+            <div id="close">x</div>
+            <div id="message">
+                <h4 th:text="${message}"></h4>
+                <a id="OK" href="#" th:text="OK"></a>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

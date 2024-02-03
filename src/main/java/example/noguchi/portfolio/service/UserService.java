@@ -38,9 +38,4 @@ public class UserService {
 
         return userRepository.save(user);
     }
-
-//    // 従業員検索
-//    public Optional<User> findByUsername(String username) {
-//        return userRepository.findByName(username);
-//    }
 }
