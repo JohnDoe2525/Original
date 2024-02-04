@@ -31,13 +31,11 @@ public class TransactionController {
 
     private final TransactionService transactionService;
     private final CategoryService categoryService;
-    private final UserService userService;
 
     @Autowired
-    public TransactionController(TransactionService transactionService,CategoryService categoryService,UserService userService) {
+    public TransactionController(TransactionService transactionService,CategoryService categoryService) {
         this.transactionService = transactionService;
         this.categoryService = categoryService;
-        this.userService = userService;
     }
 
     // ホーム画面を表示
@@ -98,7 +96,6 @@ public class TransactionController {
         }
         // カテゴリ選択用リスト
         model.addAttribute("categoryList",categoryService.getAllCategory());
-
         return "transaction/withdraw";
 
     }
@@ -158,7 +155,6 @@ public class TransactionController {
     // 更新処理
     @PostMapping(value = "/home/update/{id}")
     public String update(@PathVariable("id") Integer id,Model model,@Validated Transaction transaction,BindingResult res,@AuthenticationPrincipal UserDetail userDetail,RedirectAttributes redirectAttributes) {
-
         // 入力チェック
         if(res.hasErrors()) {
 
@@ -185,5 +181,11 @@ public class TransactionController {
         transactionService.delete(id);
 
         return "redirect:/gamanbanking/home/list";
+    }
+    // 統計画面を表示
+    @GetMapping(value = "/home/statistics")
+    public String statistics() {
+
+        return "transaction/statistics";
     }
 }
