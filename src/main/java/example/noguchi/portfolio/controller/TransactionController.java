@@ -164,17 +164,25 @@ public class TransactionController {
 
             return detail(null,model,transaction);
         }
-        // 残高下限チェック
+        // 残高チェック
         Integer userId = userDetail.getEmployee().getId();
         Integer totalBalance = transactionService.getTotalBalance(userId);
         Integer target = totalBalance + transaction.getPrice();
         if(target < -999999999 || target > 999999999) {
             model.addAttribute("limitError","残高が制限に達しています");
 
-            return detail(id,model,transaction);
+            return detail(null,model,transaction);
         }
         redirectAttributes.addFlashAttribute("message", "変更が完了しました");
         transactionService.update(id,transaction);
+
+        return "redirect:/gamanbanking/home/list";
+    }
+    @PostMapping(value = "/home/delete/{id}")
+    public String update(@PathVariable("id") Integer id,RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("message", "削除が完了しました");
+        transactionService.delete(id);
 
         return "redirect:/gamanbanking/home/list";
     }

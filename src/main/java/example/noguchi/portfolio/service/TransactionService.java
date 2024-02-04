@@ -60,9 +60,10 @@ public class TransactionService {
             totalPrice += transaction.getPrice();
             balanceList.add(totalPrice);
         }
+        
         return balanceList;
     }
-    // 更新処理
+    // 変更処理
     @Transactional
     public Transaction update(Integer id,Transaction transaction) {
         Optional<Transaction> baseTransaction = transactionRepository.findById(id);
@@ -75,6 +76,15 @@ public class TransactionService {
         transaction.setUpdatedAt(now);
 
         return transactionRepository.save(transaction);
+    }
+    // 削除処理
+    @Transactional
+    public void delete(Integer id) {
+        Optional<Transaction> transaction = transactionRepository.findById(id);
+        transaction.get().setDeleteFlg(true);
+        LocalDateTime now = LocalDateTime.now();
+        transaction.get().setUpdatedAt(now);
 
+        transactionRepository.save(transaction.get());
     }
 }

@@ -59,7 +59,11 @@
             <p>
                 <input type="submit" value="変更" class="btn btn-primary mt-3">
             </p>
+            
         </form>
+    <form th:action="@{/gamanbanking/home/delete/{id}(id=${transaction.transactionId})}" th:method="post">
+            <input type="submit" value="削除" class="btn btn-primary mt-3">
+        </form>    
     </div>
     <p class="mt-2">
         <a th:href="@{/gamanbanking/home}" class="btn btn-primary">ホーム</a>

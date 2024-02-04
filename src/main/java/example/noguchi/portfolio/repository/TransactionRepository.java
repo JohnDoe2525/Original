@@ -10,7 +10,7 @@ import example.noguchi.portfolio.entity.User;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
     //　ユーザーごとの残高を取得(取引額の合計)
-    @Query(value = "SELECT SUM(price) FROM transactions where user_id = ?1", nativeQuery = true)
+    @Query(value = "SELECT SUM(price) FROM transactions WHERE user_id = ?1 AND delete_flg = false", nativeQuery = true)
     public Integer getTotalBalance(Integer id);
     public List<Transaction> findByUser(User user);
 }
