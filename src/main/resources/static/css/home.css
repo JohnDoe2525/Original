@@ -1,0 +1,16 @@
+html{
+    background-color: rgb(226, 226, 226);
+}
+body{
+    background-color: rgb(226, 226, 226);
+}
+header{
+    background-color: #FFF;
+    height:55px;
+}
+.header-wrapper{
+    display:flex;
+}
+.card{
+    background-color: #FFF;
+}

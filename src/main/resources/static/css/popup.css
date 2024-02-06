@@ -1,0 +1,42 @@
+#popup-wrapper {
+  background-color: rgba(0, 0, 0, .5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+#popup-inside {
+  text-align: center;
+  width: 100%;
+  max-width: 300px;
+  height:150px;
+  background: white;
+  margin: 10% auto;
+  padding: 20px;
+  position: relative;
+}
+
+#message{
+    margin-top: 15px;
+}
+
+#message a {
+  background: #0d6efd;
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+  position: absolute;
+  bottom:25px;
+  transform: translateX(-50%);
+
+}
+
+#close {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  cursor: pointer;
+}
