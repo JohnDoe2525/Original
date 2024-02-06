@@ -185,7 +185,7 @@ public class TransactionController {
     // 統計画面を表示
     @GetMapping(value = "/home/statistics")
     public String statistics() {
-
+        //残高 //平均
         return "transaction/statistics";
     }
 }
