@@ -31,11 +31,13 @@ public class TransactionController {
 
     private final TransactionService transactionService;
     private final CategoryService categoryService;
+    private final UserService userService;
 
     @Autowired
-    public TransactionController(TransactionService transactionService,CategoryService categoryService) {
+    public TransactionController(TransactionService transactionService,CategoryService categoryService,UserService userService) {
         this.transactionService = transactionService;
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     // ホーム画面を表示
@@ -183,9 +185,21 @@ public class TransactionController {
         return "redirect:/gamanbanking/home/list";
     }
     // 統計画面を表示
-    @GetMapping(value = "/home/statistics")
-    public String statistics() {
-        //残高 //平均
+    @GetMapping(value = "/home/statistics/{id}")
+    public String statistics(Model model,@PathVariable("id") Integer id) {
+        // 統計
+        // 残高 // 平均
+        model.addAttribute("averageBalance", transactionService.averageBalance());
+        // 残高 // TOP
+        model.addAttribute("topBalance", transactionService.topBalance());
+        // 残高 // あなた
+        model.addAttribute("myBalance", transactionService.getTotalBalance(id));
+        // 最高残高 // 平均
+        model.addAttribute("averageBestBalance", transactionService.averageBestBalance());
+        // 最高残高 // TOP
+        model.addAttribute("topBestBalance", transactionService.topBestBalance());
+        // 最高残高 //　あなた
+        model.addAttribute("myBestBalance", transactionService.myBestBalance(userService.findById(id)));
         return "transaction/statistics";
     }
 }

@@ -2,7 +2,7 @@
 package example.noguchi.portfolio.service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +25,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // 従業員保存
+    // 新規ユーザー登録
     @Transactional
     public User save(User user) {
 
@@ -37,5 +37,13 @@ public class UserService {
         user.setUpdatedAt(now);
 
         return userRepository.save(user);
+    }
+    // 全ユーザーの取得
+    public List<User> findAllUser(){
+        return userRepository.findAll();
+    }
+    // ユーザーの取得
+    public User findById(Integer id) {
+        return userRepository.findById(id).get();
     }
 }

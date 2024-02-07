@@ -37,15 +37,15 @@
                     <tbody>
                         <tr>
                             <td>残高</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td th:text="${averageBalance}"></td>
+                            <td th:text="${topBalance}"></td>
+                            <td th:text="${myBalance}"></td>
                         </tr>
                         <tr>
                             <td>最多残高</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td th:text="${averageBestBalance}"></td>
+                            <td th:text="${topBestBalance}"></td>
+                            <td th:text="${myBestBalance}"></td>
                         </tr>
                         <tr>
                             <td>入金回数</td>
@@ -88,6 +88,7 @@
                     <a th:href="@{/gamanbanking/home}" class="btn btn-primary">ホーム</a>
                     <a th:href="@{/gamanbanking/home/withdraw}" class="btn btn-primary">出金</a>
                     <a th:href="@{/gamanbanking/home/list}" class="btn btn-primary">通帳</a>
+                    <a th:href="@{/gamanbanking/home/statistics}" class="btn btn-primary">統計</a>
                 </p>
             </div>
         </div>
