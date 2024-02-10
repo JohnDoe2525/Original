@@ -200,6 +200,21 @@ public class TransactionController {
         model.addAttribute("topBestBalance", transactionService.topBestBalance());
         // 最高残高 //　あなた
         model.addAttribute("myBestBalance", transactionService.myBestBalance(userService.findById(id)));
+        // 入金回数 // 平均
+        model.addAttribute("averageCountPayment", transactionService.averageCountPaymentAllUser());
+        // 入金回数 // TOP
+        model.addAttribute("topCountPayment", transactionService.bestCountPayment());
+        // 入金回数 // あなた
+        model.addAttribute("myCountPayment", transactionService.countPayment(userService.findById(id)));
+        // ランキング
+        // 残高
+        model.addAttribute("rankingBalance", transactionService.rankingBalance(id));
+        // 最高残高
+        model.addAttribute("rankingBestBalance",transactionService.rankingBestBalance(userService.findById(id)));
+        // 入金回数
+        model.addAttribute("rankingCountPayment",transactionService.rankingCountPayment(userService.findById(id)));
+        // ランキング用ユーザー数
+        model.addAttribute("countUsers", userService.countUsers());
         return "transaction/statistics";
     }
 }

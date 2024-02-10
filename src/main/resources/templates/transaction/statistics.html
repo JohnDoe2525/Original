@@ -49,9 +49,9 @@
                         </tr>
                         <tr>
                             <td>入金回数</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td th:text="${averageCountPayment}"></td>
+                            <td th:text="${topCountPayment}"></td>
+                            <td th:text="${myCountPayment}"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -70,15 +70,15 @@
                     <tbody>
                         <tr>
                             <td>残高</td>
-                            <td></td>
+                            <td　th:text="${rankingBalance}+'位（'+${countUsers}+'人中）'"></td>
                         </tr>
                         <tr>
                             <td>最多残高</td>
-                            <td></td>
+                            <td th:text="${rankingBestBalance}+'位（'+${countUsers}+'人中）'"></td>
                         </tr>
                         <tr>
                             <td>入金回数</td>
-                            <td></td>
+                            <td th:text="${rankingCountPayment}+'位（'+${countUsers}+'人中）'"></td>
                         </tr>
                     </tbody>
                 </table>

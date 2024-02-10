@@ -42,6 +42,10 @@ public class UserService {
     public List<User> findAllUser(){
         return userRepository.findAll();
     }
+    // 全ユーザー数の取得
+    public Integer countUsers() {
+        return findAllUser().size();
+    }
     // ユーザーの取得
     public User findById(Integer id) {
         return userRepository.findById(id).get();

@@ -3,6 +3,7 @@ package example.noguchi.portfolio.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Optional;
@@ -90,24 +91,28 @@ public class TransactionService {
         transactionRepository.save(transaction.get());
     }
     // 全ユーザーの残高を取得
-    public IntSummaryStatistics findAllUserBalance(){
+    public List<Integer> findAllUserBalance(){
         List<User> userList = userService.findAllUser();
         List<Integer> allUserBalance = new ArrayList<>();
         for (User user:userList) {
             allUserBalance.add(getTotalBalance(user.getId()));
         }
-        return allUserBalance.stream().mapToInt(Integer::intValue).summaryStatistics();
+        return allUserBalance;
     }
     // 全ユーザーの残高の平均を取得
     public Integer averageBalance() {
-        return (int) findAllUserBalance().getAverage();
+        return (int) findAllUserBalance().stream()
+                .mapToInt(Integer::intValue)
+                .summaryStatistics().getAverage();
     }
     // 全ユーザーの残高からトップの金額を取得
     public Integer topBalance() {
-        return findAllUserBalance().getMax();
+        return findAllUserBalance().stream()
+                .mapToInt(Integer::intValue)
+                .summaryStatistics().getMax();
     }
-    // 全ユーザーの最多残高を取得
-    public IntSummaryStatistics allUserBestBalance() {
+    // 全ユーザーの最高残高を取得
+    public List<Integer> allUserBestBalance() {
         List<User> userList = userService.findAllUser();
         List<Integer> transactionBalanceList = new ArrayList<>();
         for (User user:userList) {
@@ -118,24 +123,81 @@ public class TransactionService {
                         .stream().mapToInt(Integer::intValue)
                         .summaryStatistics().getMax());
             }
-            
+
         }
-        return transactionBalanceList.stream()
-                .mapToInt(Integer::intValue)
-                .summaryStatistics();
+        return transactionBalanceList;
     }
     // 全ユーザーの最高残高の平均を取得
     public Integer averageBestBalance() {
-        return (int) allUserBestBalance().getAverage();
+        return (int) allUserBestBalance().stream()
+                .mapToInt(Integer::intValue)
+                .summaryStatistics().getAverage();
     }
     // 全ユーザーの最高残高からトップの金額を取得
     public Integer topBestBalance() {
-        return allUserBestBalance().getMax();
+        return allUserBestBalance().stream()
+                .mapToInt(Integer::intValue)
+                .summaryStatistics().getMax();
     }
     // ログインユーザーの最高残高を取得
     public Integer myBestBalance(User user) {
-        return getTransactionBalance(user).stream()
+        List<Integer> transactionList = getTransactionBalance(user);
+        if (transactionList.isEmpty()) {
+            return 0;
+        } else {
+            return getTransactionBalance(user).stream()
+                    .mapToInt(Integer::intValue)
+                    .summaryStatistics().getMax();
+        }
+    }
+    // ユーザーの入金回数を取得
+    public Integer countPayment(User user) {
+        Integer count = 0;
+        List<Transaction> targetList = transactionRepository.findByUser(user);
+        for (Transaction target : targetList) {
+            if(target.getPrice()>0) {
+                count += 1;
+            }
+        }
+        return count;
+    }
+    // 全ユーザーの入金回数を取得
+    public List<Integer> countPaymentAllUser() {
+        List<Integer> countList = new ArrayList<>();
+        List<User> userList = userService.findAllUser();
+        for(User user : userList) {
+            countList.add(countPayment(user));
+        }
+        return countList;
+    }
+    // 全ユーザーの入金回数の平均を取得
+    public Integer averageCountPaymentAllUser() {
+        return (int) countPaymentAllUser().stream()
+                .mapToInt(Integer::intValue)
+                .summaryStatistics().getAverage();
+    }
+    // 全ユーザーの入金回数の最多回数を取得
+    public Integer bestCountPayment() {
+        return countPaymentAllUser().stream()
                 .mapToInt(Integer::intValue)
                 .summaryStatistics().getMax();
+    }
+    // 残高のランキング
+    public Integer rankingBalance(Integer id) {
+        List<Integer> balanceList = findAllUserBalance();
+        Collections.sort(balanceList, Collections.reverseOrder());
+        return balanceList.indexOf(getTotalBalance(id))+1;
+    }
+    // 最高残高のランキング
+    public Integer rankingBestBalance(User user) {
+        List<Integer> BestBalanceList = allUserBestBalance();
+        Collections.sort(BestBalanceList, Collections.reverseOrder());
+        return BestBalanceList.indexOf(myBestBalance(user))+1;
+    }
+    // 最高残高のランキング
+    public Integer rankingCountPayment(User user) {
+        List<Integer> countList = countPaymentAllUser();
+        Collections.sort(countList, Collections.reverseOrder());
+        return countList.indexOf(countPayment(user))+1;
     }
 }
