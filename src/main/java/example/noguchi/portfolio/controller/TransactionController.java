@@ -43,10 +43,10 @@ public class TransactionController {
     // ホーム画面を表示
     @GetMapping(value = "/home")
     public String home(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction,@ModelAttribute("message") String message) {
-        // ユーザーネーム表示用
-        model.addAttribute("loginUser", userDetail.getEmployee());
         // ユーザーの残高表示用＆桁区切り変換
         Integer userId = userDetail.getEmployee().getId();
+        // ユーザーネーム表示用
+        model.addAttribute("loginUser", userService.findById(userId));
         model.addAttribute("totalBalance", String.format("%,d円",transactionService.getTotalBalance(userId)));
         // カテゴリ選択用リスト
         model.addAttribute("categoryList",categoryService.getAllCategory());
@@ -89,10 +89,10 @@ public class TransactionController {
     // 出金画面を表示
     @GetMapping(value = "/home/withdraw")
     public String withdrawView(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction) {
-        // ユーザーネーム表示用
-        model.addAttribute("loginUser", userDetail.getEmployee());
         // ユーザーの残高表示用＆桁区切り変換
         Integer userId = userDetail.getEmployee().getId();
+        // ユーザーネーム表示用
+        model.addAttribute("loginUser", userService.findById(userId));
         String totalBalance = String.format("%,d円",transactionService.getTotalBalance(userId));
         if (totalBalance == null) {
             model.addAttribute("totalBalance", 0);
@@ -134,8 +134,9 @@ public class TransactionController {
     // 通帳画面表示
     @GetMapping(value = "/home/list")
     public String list(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction,@ModelAttribute("message") String message) {
-        User user = userDetail.getEmployee();
-        model.addAttribute("loginUser", userDetail.getEmployee());
+        Integer userid = userDetail.getEmployee().getId();
+        User user = userService.findById(userid);
+        model.addAttribute("loginUser", user);
         model.addAttribute("transactionList", transactionService.findByUser(user));
         model.addAttribute("balanceList",transactionService.getTransactionBalance(user));
         model.addAttribute("message", message);
@@ -213,6 +214,7 @@ public class TransactionController {
         model.addAttribute("rankingCountPayment",transactionService.rankingCountPayment(userService.findById(id)));
         // ランキング用ユーザー数
         model.addAttribute("countUsers", userService.countUsers());
+        model.addAttribute("id", id);
         return "transaction/statistics";
     }
 }

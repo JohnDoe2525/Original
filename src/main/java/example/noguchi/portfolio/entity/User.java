@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.validator.constraints.Length;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -26,6 +25,9 @@ import lombok.Data;
 @Table(name = "users")
 @SQLRestriction("delete_flg = false")
 public class User {
+
+    public interface UpdateValidation{
+    };
 
     public static enum Role {
         GENERAL("一般"), ADMIN("管理者");
@@ -52,13 +54,13 @@ public class User {
 
     // ユーザーネーム
     @Column(length = 20, nullable = false)
+    @Length(min=4,max = 20,message="4文字以上20文字以内で入力してください",groups= {UpdateValidation.class})
     @Length(min=4,max = 20,message="4文字以上20文字以内で入力してください")
     private String name;
 
     // メールアドレス
     @Column(length = 255, nullable = false)
     @Email
-    @NotEmpty
     @Length(max = 100)
     private String mailAddress;
 
@@ -69,7 +71,7 @@ public class User {
 
     // パスワード
     @Column(length = 255, nullable = false)
-    @Length(min=4,max=10,message="4文字以上10文字以内で入力してください")
+    @Length(min=4,message="4文字以上で入力してください")
     private String password;
 
     //　パスワード確認用

@@ -29,11 +29,11 @@
                     <div class="card-body">
 
                         <div>
-                            <p><a th:href="@{/gamanbanking/setting/menu/username}" class="btn btn-primary">ユーザーネーム変更</a>
+                            <p><a th:href="@{/gamanbanking/setting/menu/userinfo/username/{id}(id=${id})}" class="btn btn-primary">ユーザーネーム変更</a>
                             </p>
-                            <p><a th:href="@{/gamanbanking/setting/menu/password}" class="btn btn-primary">パスワード変更</a>
+                            <p><a th:href="@{/gamanbanking/setting/menu/userinfo/password/{id}(id=${id})}" class="btn btn-primary">パスワード変更</a>
                             </p>
-                            <p><a th:href="@{/gamanbanking/setting/menu/mailaddress}"
+                            <p><a th:href="@{/gamanbanking/setting/menu/userinfo/mailaddress/{id}(id=${id})}"
                                     class="btn btn-primary">メールアドレス変更</a></p>
                         </div>
                         <div class="mt-5">

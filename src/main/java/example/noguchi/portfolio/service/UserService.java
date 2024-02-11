@@ -52,4 +52,13 @@ public class UserService {
     public User findById(Integer id) {
         return userRepository.findById(id).get();
     }
+    // ユーザーネームを取得
+    public String getUserName(User user) {
+        return user.getName();
+    }
+    // ユーザー情報のアップデート
+    @Transactional
+    public User update(User user) {
+        return userRepository.save(user);
+    }
 }
