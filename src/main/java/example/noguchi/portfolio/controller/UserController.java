@@ -30,14 +30,20 @@ public class UserController {
         return "user/new";
     }
 
+    // 新規登録処理
     @PostMapping(value = "/add")
     public String add(@Validated User user,BindingResult res,Model model) {
-
         // 入力チェック
         if (res.hasErrors()) {
             return create(user,model);
         }
-
         userService.save(user);
-        return "redirect:/login";    }
+        return "redirect:/login";
+    }
+
+    // ユーザー情報確認変更画面を表示
+    @GetMapping(value = "/setting/menu/userinfo")
+    public String userinfo() {
+        return "user/userinfo";
+    }
 }
