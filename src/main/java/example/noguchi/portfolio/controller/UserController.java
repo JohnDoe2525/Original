@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import example.noguchi.portfolio.entity.User;
-import example.noguchi.portfolio.entity.User.UpdateValidation;
+import example.noguchi.portfolio.entity.User.MailAddressValidation;
+import example.noguchi.portfolio.entity.User.PasswordValidation;
+import example.noguchi.portfolio.entity.User.UsernameValidation;
 import example.noguchi.portfolio.service.UserDetail;
 import example.noguchi.portfolio.service.UserService;
 
@@ -64,16 +66,60 @@ public class UserController {
         }
         return "user/update_username";
     }
+    // パスワード変更画面を表示
+    @GetMapping(value = "/setting/menu/userinfo/password/{id}")
+    public String password(@PathVariable("id") Integer id,Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute User user ) {
+        if (id == null) {
+            model.addAttribute("unmatch", "パスワードが一致しません");
+            model.addAttribute("user", user);
+        } else {
+            model.addAttribute("user", userService.findById(id));
+        }
+        return "user/update_password";
+    }
+    // メールアドレス変更画面を表示
+    @GetMapping(value = "/setting/menu/userinfo/mailaddress/{id}")
+    public String mailAddress(@PathVariable("id") Integer id,Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute User user ) {
+        if (id == null) {
+            Integer userid = userDetail.getEmployee().getId();
+            user.setMailAddress(userService.findById(userid).getMailAddress());
+            model.addAttribute("user", user);
+        } else {
+            model.addAttribute("user", userService.findById(id));
+        }
+        return "user/update_mailaddress";
+    }
     // ユーザーネーム更新処理
-    @PostMapping(value = "/setting/user/update")
-    public String updateUserName(@Validated(UpdateValidation.class) User user,BindingResult res,Model model,@AuthenticationPrincipal UserDetail userDetail) {
+    @PostMapping(value = "/setting/user/update/username")
+    public String updateUserName(@Validated(UsernameValidation.class) User user,BindingResult res,Model model,@AuthenticationPrincipal UserDetail userDetail) {
         // 入力チェック
         if (res.hasErrors()) {
             return username(null,model,userDetail,user);
         }
-        User baseUser = userService.findById(userDetail.getEmployee().getId());
-        baseUser.setName(user.getName());
-        userService.update(baseUser);
+        userService.update(user,userDetail);
+        return "redirect:/gamanbanking/setting/menu/userinfo";
+    }
+    // パスワード更新処理
+    @PostMapping(value = "/setting/user/update/password")
+    public String updatePassword(@Validated(PasswordValidation.class) User user,BindingResult res,Model model,@AuthenticationPrincipal UserDetail userDetail) {
+        // 入力チェック
+        if (res.hasErrors()) {
+            return password(null,model,userDetail,user);
+        }
+        if(user.getPassword().equals(user.getConfirmPassword()) != true) {
+            return password(null,model,userDetail,user);
+        }
+        userService.update(user,userDetail);
+        return "redirect:/gamanbanking/setting/menu/userinfo";
+    }
+    // メールアドレス更新処理
+    @PostMapping(value = "/setting/user/update/mailaddress")
+    public String updateMailAddress(@Validated(MailAddressValidation.class) User user,BindingResult res,Model model,@AuthenticationPrincipal UserDetail userDetail) {
+        // 入力チェック
+        if (res.hasErrors()) {
+            return mailAddress(null,model,userDetail,user);
+        }
+        userService.update(user,userDetail);
         return "redirect:/gamanbanking/setting/menu/userinfo";
     }
 }

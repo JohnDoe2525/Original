@@ -26,7 +26,11 @@ import lombok.Data;
 @SQLRestriction("delete_flg = false")
 public class User {
 
-    public interface UpdateValidation{
+    public interface UsernameValidation{
+    };
+    public interface PasswordValidation{
+    };
+    public interface MailAddressValidation{
     };
 
     public static enum Role {
@@ -54,13 +58,16 @@ public class User {
 
     // ユーザーネーム
     @Column(length = 20, nullable = false)
-    @Length(min=4,max = 20,message="4文字以上20文字以内で入力してください",groups= {UpdateValidation.class})
+    @Length(min=4,max = 20,message="4文字以上20文字以内で入力してください",groups= {UsernameValidation.class})
     @Length(min=4,max = 20,message="4文字以上20文字以内で入力してください")
     private String name;
 
     // メールアドレス
     @Column(length = 255, nullable = false)
+    @Email(groups= {MailAddressValidation.class})
     @Email
+    @NotEmpty(groups= {MailAddressValidation.class})
+    @NotEmpty
     @Length(max = 100)
     private String mailAddress;
 
@@ -72,6 +79,7 @@ public class User {
     // パスワード
     @Column(length = 255, nullable = false)
     @Length(min=4,message="4文字以上で入力してください")
+    @Length(min=4,message="4文字以上で入力してください",groups= {PasswordValidation.class})
     private String password;
 
     //　パスワード確認用

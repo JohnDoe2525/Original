@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,7 +59,17 @@ public class UserService {
     }
     // ユーザー情報のアップデート
     @Transactional
-    public User update(User user) {
-        return userRepository.save(user);
+    public User update(User user,@AuthenticationPrincipal UserDetail userDetail) {
+        User baseUser = findById(userDetail.getEmployee().getId());
+        if(user.getName() != null) {
+            baseUser.setName(user.getName());
+        } else if(user.getPassword() != null) {
+            baseUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        } else if(user.getMailAddress() != null) {
+            baseUser.setMailAddress(user.getMailAddress());
+        }
+        LocalDateTime now = LocalDateTime.now();
+        user.setUpdatedAt(now);
+        return userRepository.save(baseUser);
     }
 }
