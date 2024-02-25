@@ -18,9 +18,10 @@ public class SecurityConfig {
                 .defaultSuccessUrl("/") // ログイン成功後のリダイレクト先
                 .failureUrl("/login?error") // ログイン失敗時のリダイレクト先
                 .permitAll() // ログイン画面は未ログインでアクセス可
-        ).logout(logout -> logout.logoutSuccessUrl("/login") // ログアウト後のリダイレクト先
+        ).logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/login") // ログアウト後のリダイレクト先
         ).authorizeHttpRequests(
                 auth -> auth.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                .requestMatchers("/gamanbanking/new","/gamanbanking/add").permitAll()
                 .anyRequest().authenticated());
 
         return http.build();
