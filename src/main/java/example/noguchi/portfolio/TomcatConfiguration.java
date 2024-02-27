@@ -1,6 +1,10 @@
 package example.noguchi.portfolio; // ご自身の環境に合わせてください
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import org.apache.catalina.connector.Connector;
+import org.apache.coyote.ajp.AbstractAjpProtocol;
 import org.apache.coyote.ajp.AjpNio2Protocol;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
@@ -25,6 +29,14 @@ public class TomcatConfiguration implements WebServerFactoryCustomizer<TomcatSer
         // secretという保護機能を利用しないようにする設定
         AjpNio2Protocol protocol = (AjpNio2Protocol) connector.getProtocolHandler();
         protocol.setSecretRequired(false);
+
+        InetAddress ip = null;
+        try {
+            ip = InetAddress.getByName("0.0.0.0");
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        ((AbstractAjpProtocol<?>) connector.getProtocolHandler()).setAddress(ip);
 
         return connector;
     }
