@@ -39,7 +39,7 @@ public class UserController {
 
     // 新規登録処理
     @PostMapping(value = "/add")
-    public String add(@Validated User user,BindingResult res,Model model) {
+    public String add(@Validated(UsernameValidation.class) User user,BindingResult res,Model model) {
         // 入力チェック
         if (res.hasErrors()) {
             return create(user,model);
@@ -61,6 +61,7 @@ public class UserController {
             Integer userid = userDetail.getEmployee().getId();
             user.setName(userService.findById(userid).getName());
             model.addAttribute("user", user);
+            model.addAttribute("useridError", "半角英数字を使用してください");
         } else {
             model.addAttribute("user", userService.findById(id));
         }
@@ -89,7 +90,7 @@ public class UserController {
         }
         return "user/update_mailaddress";
     }
-    // ユーザーネーム更新処理
+    // ユーザーID更新処理
     @PostMapping(value = "/setting/user/update/username")
     public String updateUserName(@Validated(UsernameValidation.class) User user,BindingResult res,Model model,@AuthenticationPrincipal UserDetail userDetail) {
         // 入力チェック

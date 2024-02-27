@@ -18,6 +18,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
@@ -50,14 +51,16 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Transaction> transactionList;
 
-    // ユーザーID
+    // ID
     @Id
     @Column(length = 10)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // ユーザーネーム
+    // ユーザーID
     @Column(length = 20, nullable = false)
+
+    @Pattern(regexp = "^[a-zA-Z0-9]+$",groups= {UsernameValidation.class})
     @Length(min=4,max = 20,message="4文字以上20文字以内で入力してください",groups= {UsernameValidation.class})
     @Length(min=4,max = 20,message="4文字以上20文字以内で入力してください")
     private String name;
