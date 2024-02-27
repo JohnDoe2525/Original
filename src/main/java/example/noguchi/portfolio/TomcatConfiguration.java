@@ -29,7 +29,7 @@ public class TomcatConfiguration implements WebServerFactoryCustomizer<TomcatSer
         // secretという保護機能を利用しないようにする設定
         AjpNio2Protocol protocol = (AjpNio2Protocol) connector.getProtocolHandler();
         protocol.setSecretRequired(false);
-
+        //　リモートホストからの接続
         InetAddress ip = null;
         try {
             ip = InetAddress.getByName("0.0.0.0");
