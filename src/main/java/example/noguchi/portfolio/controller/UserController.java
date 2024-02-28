@@ -34,6 +34,10 @@ public class UserController {
     @GetMapping(value = "/new")
     public String create(User user,Model model) {
         model.addAttribute("user", user);
+        // 重複チェック
+        if (userService.useridExists(user)) {
+           model.addAttribute("existsError", "このユーザーIDは既に使われています");
+        }
         return "user/new";
     }
 
@@ -42,6 +46,10 @@ public class UserController {
     public String add(@Validated(UsernameValidation.class) User user,BindingResult res,Model model) {
         // 入力チェック
         if (res.hasErrors()) {
+            return create(user,model);
+        }
+        // 重複チェック
+        if (userService.useridExists(user)) {
             return create(user,model);
         }
         userService.save(user);
@@ -54,14 +62,13 @@ public class UserController {
         model.addAttribute("id", userDetail.getEmployee().getId());
         return "user/userinfo";
     }
-    // ユーザーネーム確認変更画面を表示
+    // ユーザーID確認変更画面を表示
     @GetMapping(value = "/setting/menu/userinfo/username/{id}")
     public String username(@PathVariable("id") Integer id,Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute User user ) {
         if (id == null) {
             Integer userid = userDetail.getEmployee().getId();
             user.setName(userService.findById(userid).getName());
             model.addAttribute("user", user);
-            model.addAttribute("useridError", "半角英数字を使用してください");
         } else {
             model.addAttribute("user", userService.findById(id));
         }
@@ -95,6 +102,10 @@ public class UserController {
     public String updateUserName(@Validated(UsernameValidation.class) User user,BindingResult res,Model model,@AuthenticationPrincipal UserDetail userDetail) {
         // 入力チェック
         if (res.hasErrors()) {
+            return username(null,model,userDetail,user);
+        }
+        // 重複チェック
+        if (userService.useridExists(user)) {
             return username(null,model,userDetail,user);
         }
         userService.update(user,userDetail);

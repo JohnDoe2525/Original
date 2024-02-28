@@ -37,9 +37,9 @@
                                     <label class="form-label" for="name">変更後のユーザーID</label>
                                     <p class="mb-1"></p>
                                     <div class="col-7">
-                                        <input class="form-control" id="name" name="name" type="text">
-                                        <span th:if="${useridError != null}" th:text="${useridError}"
-                                        class="text-danger"></span>
+                                        <input class="form-control" id="name" name="name" type="text",th:errorclass="err">
+                                        <span th:errors="*{name}" class="text-danger"></span>
+                                        <span th:if="${existsError != null}" th:text="${existsError}"class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>

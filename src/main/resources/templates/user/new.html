@@ -35,6 +35,7 @@
                                     <div class="col-7">
                                         <input class="form-control" th:field="*{name}" th:errorclass="err" type="text" id="name">
                                         <span th:errors="*{name}" class="text-danger"></span>
+                                        <span th:if="${existsError != null}" th:text="${existsError}"class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="mb-3">

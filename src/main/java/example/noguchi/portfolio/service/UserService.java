@@ -31,7 +31,6 @@ public class UserService {
     // 新規ユーザー登録
     @Transactional
     public User save(User user) {
-
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(Role.GENERAL);
         user.setDeleteFlg(false);
@@ -41,6 +40,12 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
+    // 既に同じユーザーIDが登録されているかチェック
+    public boolean useridExists(User user) {
+        return userRepository.findByName(user.getName()).isPresent();
+    }
+
     // 全ユーザーの取得
     public List<User> findAllUser(){
         return userRepository.findAll();
