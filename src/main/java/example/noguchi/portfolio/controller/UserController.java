@@ -66,6 +66,9 @@ public class UserController {
     @GetMapping(value = "/setting/menu/userinfo/username/{id}")
     public String username(@PathVariable("id") Integer id,Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute User user ) {
         if (id == null) {
+            if (userService.useridExists(user)) {
+                model.addAttribute("existsError", "このユーザー名は使用されています");
+            }
             Integer userid = userDetail.getEmployee().getId();
             user.setName(userService.findById(userid).getName());
             model.addAttribute("user", user);
