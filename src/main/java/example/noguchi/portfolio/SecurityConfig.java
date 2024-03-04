@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.savedrequest.NullRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
 
 @Configuration
 public class SecurityConfig {
@@ -23,6 +25,9 @@ public class SecurityConfig {
                 auth -> auth.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .requestMatchers("/gamanbanking/new","/gamanbanking/add").permitAll()
                 .anyRequest().authenticated());
+        
+        RequestCache nullRequestCache = new NullRequestCache();
+        http.requestCache((cache) -> cache.requestCache(nullRequestCache));
 
         return http.build();
     }
