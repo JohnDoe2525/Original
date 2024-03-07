@@ -1,10 +1,7 @@
 package example.noguchi.portfolio.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +19,6 @@ import example.noguchi.portfolio.service.CategoryService;
 import example.noguchi.portfolio.service.TransactionService;
 import example.noguchi.portfolio.service.UserDetail;
 import example.noguchi.portfolio.service.UserService;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -47,7 +43,7 @@ public class TransactionController {
         Integer userId = userDetail.getEmployee().getId();
         // ユーザーネーム表示用
         model.addAttribute("loginUser", userService.findById(userId));
-        model.addAttribute("totalBalance", String.format("%,d円",transactionService.getTotalBalance(userId)));
+        model.addAttribute("totalBalance", String.format("%,d 円",transactionService.getTotalBalance(userId)));
         // カテゴリ選択用リスト
         model.addAttribute("categoryList",categoryService.getAllCategory());
         model.addAttribute("message", message);
