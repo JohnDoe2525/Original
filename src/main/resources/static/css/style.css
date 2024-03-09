@@ -1,0 +1,93 @@
+*,*::before,*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: rgb(0, 64, 0);
+    font-family: "Robot","Helvetica Neue","Helvetica","Hiragino Sans";
+    background-color: rgb(239, 250, 231);
+}
+
+h2,h3 {
+    color: rgb(0, 64, 0);
+    font-family: "Robot","Piazzolla","Time New Roman", "YuMincho";
+    margin-top: 0;
+    font-weight: 700;
+}
+
+ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+a,input,text,select {
+    transition: all 0.15s ease-in-out;
+}
+
+input[type="submit"]:hover {
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0px 20px;
+}
+
+.main-tran-container {
+    padding: 30px 20px;
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    border: 1px solid #65B741;
+    border-radius: 3px;
+    color: #FBF6EE;
+    font-family: "Robot","Piazzolla","Time New Roman", "YuMincho";
+    font-weight: 600;
+    font-size: 1rem;
+    background-color: #65B741;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.btn:hover,.btn:focus {
+    color: #65B741;
+    background-color: #C5EBAA;
+}
+
+header {
+    color:#FBF6EE;
+    font-family: "Robot","Piazzolla","Time New Roman", "YuMincho";
+    font-weight: 600;
+    background-color: #65B741;
+
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header-nav-menu {
+    justify-content: space-between;
+    width: 100%;
+    display: flex;
+}
+
+.header-nav-menu-item > a {
+    color:#FBF6EE;
+}
