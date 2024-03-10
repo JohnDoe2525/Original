@@ -4,19 +4,14 @@
 
 html {
     scroll-behavior: smooth;
+    font-size: 10px;
 }
 
 body {
     color: rgb(0, 64, 0);
     font-family: "Robot","Helvetica Neue","Helvetica","Hiragino Sans";
     background-color: rgb(239, 250, 231);
-}
-
-h2,h3 {
-    color: rgb(0, 64, 0);
-    font-family: "Robot","Piazzolla","Time New Roman", "YuMincho";
-    margin-top: 0;
-    font-weight: 700;
+    font-size: 1.5rem;
 }
 
 ul {
@@ -42,21 +37,28 @@ input[type="submit"]:hover {
     margin: 0px 20px;
 }
 
-.main-tran-container {
-    padding: 30px 20px;
-    border: 1px solid;
-    border-radius: 3px;
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input {
+    margin-bottom: 15px;
+}
+
+select {
+    margin-bottom: 15px;
 }
 
 .btn {
     display: inline-block;
-    padding: 10px 15px;
+    padding: 10px 20px;
     border: 1px solid #65B741;
     border-radius: 3px;
     color: #FBF6EE;
     font-family: "Robot","Piazzolla","Time New Roman", "YuMincho";
-    font-weight: 600;
-    font-size: 1rem;
+    font-weight: 500;
+    font-size: 1.5rem;
     background-color: #65B741;
     letter-spacing: 1px;
     text-decoration: none;
@@ -72,7 +74,16 @@ header {
     font-family: "Robot","Piazzolla","Time New Roman", "YuMincho";
     font-weight: 600;
     background-color: #65B741;
+}
 
+footer {
+    padding: 15px 0;
+    text-align: center;
+    color:#FBF6EE;
+    font-family: "Robot","Piazzolla","Time New Roman", "YuMincho";
+    background-color: #65B741;
+    position: sticky;
+    top: 100vh;
 }
 
 .header-top {
@@ -80,14 +91,53 @@ header {
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    padding: 10px 10px;
+}
+
+.header-logo {
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .header-nav-menu {
-    justify-content: space-between;
+    justify-content:space-between;
     width: 100%;
     display: flex;
+    padding: 0 15px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .header-nav-menu-item > a {
     color:#FBF6EE;
+}
+
+.main-display-username {
+    margin-bottom: 10px;
+}
+
+.main-display-container {
+    display: flex;
+    width: 100%;
+    border: 1px solid;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    justify-content: right;
+}
+
+.main-display-total {
+    color: rgb(0, 64, 0);
+    font-family: "Robot","Piazzolla","Time New Roman", "YuMincho";
+}
+
+.main-tran-container {
+    margin-bottom: 25px;
+    padding: 30px 20px 10px 20px;
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+.main-tran-submit {
+    margin-top: 10px;
+    text-align: center;
 }

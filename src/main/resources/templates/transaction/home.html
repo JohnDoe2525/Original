@@ -60,8 +60,8 @@
     </header>
     <main>
         <div class="container">
-            <div class="main-display-container">
-                <h2 class="main-display-username" th:text="${loginUser.name}+' さんの残高は...'"></h2>
+            <div class="main-display">
+                <div class="main-display-username" th:text="${loginUser.name}+' さんの残高は...'"></div>
                 <div class="main-display-container">
                     <div class="main-display-total" th:text="${totalBalance}"></div>
                 </div>
@@ -69,9 +69,9 @@
             <div class="main-tran-container">
                 <form th:action="@{/gamanbanking/home/add}" th:method="post" 　th:object="${transaction}">
                     <div class="main-tran-category">
-                        <div class="main-tran-category-label">
-                            <h3><label class="form-label mt-2" for="category">何を買うのをガマンした？</label></h3>
-                        </div>
+
+                            <label class="form-label mt-2" for="category">何を買うのをガマンしましたか？</label>
+
                         <div class="main-tran-category-select">
                             <select th:field="*{category.id}" id="category">
                                 <option class="form-control" value="" 　th:text="選択してください"></option>
@@ -85,9 +85,9 @@
                         </div>
                     </div>
                     <div class="main-tran-price">
-                        <div class="main-tran-price-label">
-                            <h3><label class="form-label" for="price">金額を入力してください</label></h3>
-                        </div>
+
+                            <label class="form-label" for="price">金額を入力してください</label>
+
                         <div class="main-tran-price-input">
                             <input class="form-control col-xl-5" type="text" th:field="*{price}" 　th:errorclass="err"
                                 id="price" maxlength="9">
@@ -98,9 +98,9 @@
                         </div>
                     </div>
                     <div class="main-tran-memo">
-                        <div class="main-tarn-memo-label">
-                            <h3><label class="form-label mt-2" for="memo">メモ</label></h3>
-                        </div>
+
+                            <label class="form-label mt-2" for="memo">メモ</label>
+
                         <div class="main-tran-memo-input">
                             <input class="form-control" type="text" th:field="*{memo}" th:errorclass="err"
                                 id="memo"></input>
@@ -109,7 +109,9 @@
                             <span th:errors="*{memo}" class="text-danger"></span>
                         </div>
                     </div>
-                    <input type="submit" value="入金する" class="btn">
+                    <div class="main-tran-submit">
+                        <input type="submit" value="入金する" class="btn">
+                    </div>
                 </form>
             </div>
             <div id="popup-wrapper" th:if="${message != null}">
