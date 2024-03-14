@@ -5,6 +5,8 @@
 html {
     scroll-behavior: smooth;
     font-size: 10px;
+    min-height: 100vh;
+    position: relative;
 }
 
 body {
@@ -34,7 +36,7 @@ input[type="submit"]:hover {
 
 .container {
     max-width: 1280px;
-    margin: 0px 20px;
+    margin: 0px 10px;
 }
 
 label {
@@ -62,6 +64,19 @@ select {
     background-color: #65B741;
     letter-spacing: 1px;
     text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.logout-btn {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0;
+    background-color: #65B741;
+    border: none;
+    color: #FBF6EE;
+    font-family: "Robot","Piazzolla","Time New Roman", "YuMincho";
+    font-weight: 500;
+    font-size: 1.0rem;
 }
 
 .btn:hover,.btn:focus {
@@ -77,13 +92,15 @@ header {
 }
 
 footer {
+    width: 100%;
     padding: 15px 0;
     text-align: center;
     color:#FBF6EE;
     font-family: "Robot","Piazzolla","Time New Roman", "YuMincho";
     background-color: #65B741;
-    position: sticky;
-    top: 100vh;
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
 
 .header-top {
@@ -119,8 +136,8 @@ footer {
 .main-display-container {
     display: flex;
     width: 100%;
-    border: 1px solid;
-    padding: 10px 10px;
+    border: 1px solid #cccccc;
+    padding: 10px 50px;
     margin-bottom: 10px;
     justify-content: right;
 }
@@ -133,7 +150,7 @@ footer {
 .main-tran-container {
     margin-bottom: 25px;
     padding: 30px 20px 10px 20px;
-    border: 1px solid;
+    border: 1px solid #cccccc;
     border-radius: 3px;
 }
 

@@ -43,7 +43,7 @@
         <div class="header-top">
             <div class="header-icon">GamanBanking</div>
             <form th:action="@{/logout}" method="post">
-                <input type="submit" value="ログアウト">
+                <input type="submit" value="ログアウト" class="logout-btn">
             </form>
         </div>
         <div class="header-logo">GB</div>
@@ -70,7 +70,7 @@
                 <form th:action="@{/gamanbanking/home/add}" th:method="post" 　th:object="${transaction}">
                     <div class="main-tran-category">
 
-                            <label class="form-label mt-2" for="category">何を買うのをガマンしましたか？</label>
+                            <label cfor="category">何を買うのをガマンしましたか？</label>
 
                         <div class="main-tran-category-select">
                             <select th:field="*{category.id}" id="category">
@@ -89,7 +89,7 @@
                             <label class="form-label" for="price">金額を入力してください</label>
 
                         <div class="main-tran-price-input">
-                            <input class="form-control col-xl-5" type="text" th:field="*{price}" 　th:errorclass="err"
+                            <input type="text" th:field="*{price}" 　th:errorclass="err"
                                 id="price" maxlength="9">
                         </div>
                         <div class="alert">
@@ -99,7 +99,7 @@
                     </div>
                     <div class="main-tran-memo">
 
-                            <label class="form-label mt-2" for="memo">メモ</label>
+                            <label class="form-label mt-2" for="memo">memo</label>
 
                         <div class="main-tran-memo-input">
                             <input class="form-control" type="text" th:field="*{memo}" th:errorclass="err"
