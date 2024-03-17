@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html class="h-100" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head class="container">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title th:text="ホーム"></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
-        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
-        crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/nomalize.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/style-mobile.css}">
     <link rel="stylesheet" th:href="@{/css/popup.css}">
     <script th:inline="javascript">document.addEventListener('DOMContentLoaded', function () {
             // サーバーからメッセージを取得
@@ -39,59 +38,65 @@
     </script>
 </head>
 
-<body class="overflow-hidden">
-    <div class="row h-100  justify-content-center">
-        <div class="row h-100  justify-content-center">
-            <p class="welcome" th:text="${loginUser.name}+' さんの通帳'"></p>
-        </div>
-        <div class="row h-100  justify-content-center">
-            <div class="card-body">
-                <table class="table table-striped w-50">
-                    <thead>
-                        <tr>
-                            <th>日付</th>
-                            <th>カテゴリ</th>
-                            <th>金額</th>
-                            <th>残高</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="tran,status : ${transactionList}">
-                            <td th:text="${#temporals.format(tran.transactionDate,'yyyy-MM-dd')}"></td>
-                            <td th:text="${tran.category.name}"></td>
-                            <td th:text="${tran.price}"></td>
-                            <td>
-                                <span th:text="${balanceList[status.index]}"></span>
-                            </td>
-                            <td><a th:href="@{/gamanbanking/home/detail/{id}(id=${tran.transactionId})}">編集</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="mt-2">
-                <a th:href="@{/gamanbanking/home}" class="btn btn-primary">ホーム</a>
-                <a th:href="@{/gamanbanking/home/withdraw}" class="btn btn-primary">出金</a>
-                <a th:href="@{/gamanbanking/home/list}" class="btn btn-primary">通帳</a>
-                <a th:href="@{/gamanbanking/home/statistics/{id}(id=${loginUser.id})}" class="btn btn-primary">統計</a>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="header-icon">GamanBanking</div>
             <form th:action="@{/logout}" method="post">
-                <input type="submit" value="ログアウト">
+                <input type="submit" value="ログアウト" class="logout-btn">
             </form>
-            </p>
         </div>
-    </div>
-    <div id="popup-wrapper" th:if="${message != null}">
-        <div id="popup-inside">
-            <div id="close">x</div>
-            <div id="message">
-                <h4 th:text="${message}"></h4>
-                <a id="OK" href="#" th:text="OK"></a>
+        <div class="header-logo">GB</div>
+        <nav class="header-nav">
+            <ul class="header-nav-menu">
+                <li class=header-nav-menu-item><a th:href="@{/gamanbanking/home}">ホーム</a></li>
+                <li class=header-nav-menu-item><a th:href="@{/gamanbanking/home/withdraw}">出金</a></li>
+                <li class=header-nav-menu-item><a th:href="@{/gamanbanking/home/list}">通帳</a></li>
+                <li class=header-nav-menu-item><a
+                        th:href="@{/gamanbanking/home/statistics/{id}(id=${loginUser.id})}">統計</a></li>
+                <li class=header-nav-menu-item><a th:href="@{/gamanbanking/setting/menu}">設定</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="main-display-username" th:text="${loginUser.name}+' さんの通帳（取引履歴）'"></div>
+            <table class="balance-table">
+                <thead>
+                    <tr>
+                        <th>日付</th>
+                        <th>カテゴリ</th>
+                        <th>金額</th>
+                        <th>残高</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="tran,status : ${transactionList}">
+                        <td th:text="${#temporals.format(tran.transactionDate,'yyyy-MM-dd')}" class="td-data"></td>
+                        <td th:text="${tran.category.name}" class="td-category"></td>
+                        <td th:text="${tran.price}" class="td-price"></td>
+                        <td class="td-total">
+                            <span th:text="${balanceList[status.index]}"></span>
+                        </td>
+                        <td class="td-url"><a th:href="@{/gamanbanking/home/detail/{id}(id=${tran.transactionId})}">編集</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="popup-wrapper" th:if="${message != null}">
+                <div id="popup-inside">
+                    <div id="close">x</div>
+                    <div id="message">
+                        <h4 th:text="${message}"></h4>
+                        <a id="OK" href="#" th:text="OK"></a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
+    </main>
+    <footer>
+        <small>©GamanBanking</small>
+    </footer>
 </body>
 
 </html>

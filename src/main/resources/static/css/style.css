@@ -6,7 +6,7 @@ html {
     scroll-behavior: smooth;
     font-size: 10px;
     min-height: 100vh;
-    position: relative;
+
 }
 
 body {
@@ -14,6 +14,10 @@ body {
     font-family: "Robot","Helvetica Neue","Helvetica","Hiragino Sans";
     background-color: rgb(239, 250, 231);
     font-size: 1.5rem;
+}
+
+main {
+    margin-bottom: 60px;
 }
 
 ul {
@@ -98,9 +102,10 @@ footer {
     color:#FBF6EE;
     font-family: "Robot","Piazzolla","Time New Roman", "YuMincho";
     background-color: #65B741;
-    position: absolute;
+    position: fixed;
     left: 0;
     bottom: 0;
+    z-index: 1;
 }
 
 .header-top {
@@ -156,5 +161,38 @@ footer {
 
 .main-tran-submit {
     margin-top: 10px;
+    text-align: center;
+}
+
+/* 通帳画面 */
+
+.balance-table {
+    width: 100%;
+    border-collapse:  collapse;
+    white-space: nowrap;
+    overflow: scroll;
+}
+
+.balance-table th{
+    text-align: center;
+    border: solid 1px  #cccccc;
+    background-color: #65B741;
+    font-size: 1.2rem;
+    color:#FBF6EE;
+    font-weight: normal;
+    padding-top: 0.3rem;
+}
+
+td {
+    font-size: 1.2rem;
+    border: solid 1px  #cccccc;
+    padding: 0.3rem 0.5rem;
+}
+
+.td-price,.td-total {
+    text-align: right;
+}
+
+.td-url {
     text-align: center;
 }

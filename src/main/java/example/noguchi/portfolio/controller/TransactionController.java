@@ -89,7 +89,7 @@ public class TransactionController {
         Integer userId = userDetail.getEmployee().getId();
         // ユーザーネーム表示用
         model.addAttribute("loginUser", userService.findById(userId));
-        String totalBalance = String.format("%,d円",transactionService.getTotalBalance(userId));
+        String totalBalance = String.format("%,d 円",transactionService.getTotalBalance(userId));
         if (totalBalance == null) {
             model.addAttribute("totalBalance", 0);
         } else {
