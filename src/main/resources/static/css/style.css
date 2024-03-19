@@ -166,14 +166,15 @@ footer {
 
 /* 通帳画面 */
 
-.balance-table {
+table {
     width: 100%;
     border-collapse:  collapse;
     white-space: nowrap;
     overflow: scroll;
+    margin-bottom: 10px;
 }
 
-.balance-table th{
+th{
     text-align: center;
     border: solid 1px  #cccccc;
     background-color: #65B741;
@@ -194,5 +195,23 @@ td {
 }
 
 .td-url {
+    text-align: center;
+}
+
+/* 統計画面 */
+
+.table-label {
+    margin-bottom: 10px;
+}
+
+.wrapper-table .td-title {
+    text-align: left;
+}
+
+.compare-table td {
+    text-align: right;
+}
+
+.ranking-table td {
     text-align: center;
 }
