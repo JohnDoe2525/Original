@@ -74,7 +74,7 @@
 
                         <div class="main-tran-category-select">
                             <select th:field="*{category.id}" id="category">
-                                <option class="form-control" value="" 　th:text="選択してください"></option>
+                                <option class="form-control" value="" th:text="選択してください"></option>
                                 <option class="form-control" th:each="item:${categoryList}" th:value="${item.id}"
                                     th:text="${item.name}" id="category"></option>
                             </select>
@@ -86,14 +86,14 @@
                     </div>
                     <div class="main-tran-price">
 
-                        <label class="form-label" for="price">金額を入力してください</label>
+                        <label class="form-label" for="price">金額</label>
 
                         <div class="main-tran-price-input">
-                            <input type="text" th:field="*{price}" 　th:errorclass="err" id="price" maxlength="9">
+                            <input type="text" th:field="*{price}" th:errorclass="err" id="price" maxlength="9">
                         </div>
                         <div class="alert">
                             <span th:errors="*{price}" class="text-danger"></span>
-                            <span th:if="${limitError != null}" th:text="${limitError}" 　class="text-danger"></span>
+                            <span th:if="${limitError != null}" th:text="${limitError}" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="main-tran-memo">

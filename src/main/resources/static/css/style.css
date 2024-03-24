@@ -169,6 +169,12 @@ footer {
   text-align: center;
 }
 
+.text-danger {
+  display: block;
+  color: red;
+  margin-bottom: 10px;
+}
+
 /* 通帳画面 */
 
 table {

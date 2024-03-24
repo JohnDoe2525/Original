@@ -61,8 +61,8 @@ public class User {
     @Column(length = 20, nullable = false)
 
     @Pattern(regexp = "^[a-zA-Z0-9]+$",groups= {UsernameValidation.class})
-    @Length(min=4,max = 20,message="4文字以上20文字以内で入力してください",groups= {UsernameValidation.class})
-    @Length(min=4,max = 20,message="4文字以上20文字以内で入力してください")
+    @Length(min=4,max = 20,message="4文字～20文字で入力してください",groups= {UsernameValidation.class})
+    @Length(min=4,max = 20,message="4文字～20文字で入力してください")
     private String name;
 
     // メールアドレス
