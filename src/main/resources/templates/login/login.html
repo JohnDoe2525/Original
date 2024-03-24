@@ -1,48 +1,55 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
-<head class="container">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title th:text="ホーム"></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/home.css}">
-</head>
-<body>
-    <div class="main justify-content-center w-100">
-        <main class="content p-0">
-            <div class="container flex-column">
-                <div class="row h-100">
-                    <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
-                        <div class="d-table-cell align-middle">
-
-                            <div class="text-center mt-4">
-                                <h1 class="h2">ようこそ</h1>
-                            </div>
-
-                            <form th:action="@{/login}" th:method="post">
-                                <div class="mb-3">
-                                    <label class="form-label" for="username">ユーザーID</label> <input class="form-control form-control-lg" id="username" name="username">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="password">パスワード</label> <input class="form-control form-control-lg" type="password" id="password" name="password">
-                                </div>
-                                <span class="text-danger" th:if="${param.error}">ユーザーIDまたはパスワードが正しくありません</span>
-                                <p class="mb-5"></p>
-                                <div class="text-center">
-                                    <input type="submit" name="loginRun" value="ログイン" class="btn btn-lg btn-primary">
-                                    <a th:href="@{/gamanbanking/new}" class="btn btn-lg btn-primary">新規登録</a>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
+  <head class="container">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/css/nomalize.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/style-mobile.css}" />
+    <link rel="stylesheet" th:href="@{/css/popup.css}" />
+  </head>
+  <body>
+    <header>
+      <div class="header-top">
+        <div class="header-icon">GamanBanking</div>
+      </div>
+      <div class="header-logo">GB</div>
+    </header>
+    <main>
+      <div class="container">
+        <div class="page-title">
+          <h3>ようこそ GamanBanking へ</h3>
+        </div>
+        <div class="common-container">
+          <form th:action="@{/login}" th:method="post">
+            <label for="username">ユーザーID</label>
+            <input id="username" name="username" />
+            <label for="password">パスワード</label>
+            <input type="password" id="password" name="password" />
+            <span class="text-danger" th:if="${param.error}"
+              >ユーザーIDまたはパスワードが正しくありません</span
+            >
+            <div class="common-submit">
+              <input
+                type="submit"
+                name="loginRun"
+                value="ログイン"
+                class="btn"
+              />
+              <a th:href="@{/gamanbanking/new}" class="btn">新規登録</a>
             </div>
-        </main>
-    </div>
-
-</body>
-
+          </form>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <small>©GamanBanking</small>
+    </footer>
+  </body>
 </html>
