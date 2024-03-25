@@ -1,9 +1,9 @@
-INSERT INTO gaman_banking.users(id,name,mail_address,role,password,delete_flg,created_at,updated_at)
-     VALUES (null,"admin","admin@example.co.jp","ADMIN","$2a$10$vY93/U2cXCfEMBESYnDJUevcjJ208sXav23S.K8elE/J6Sxr4w5jO",0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
-INSERT INTO gaman_banking.users(id,name,mail_address,role,password,delete_flg,created_at,updated_at)
-     VALUES (null,"taro","taro@example.co.jp","GENERAL","$2a$10$HPIjRCymeRZKEIq.71TDduiEotOlb8Ai6KQUHCs4lGNYlLhcKv4Wi",0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
-INSERT INTO gaman_banking.users(id,name,mail_address,role,password,delete_flg,created_at,updated_at)
-     VALUES (null,"naotake","na_noguchi@example.co.jp","GENERAL","$2a$10$rX2DEJ4bpu7jyOobgECaXOoJyehmqP7Y4oNTQruXb43/mI5G0NFU.",0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO gaman_banking.users(id,name,role,password,delete_flg,created_at,updated_at)
+     VALUES (null,"admin","ADMIN","$2a$10$vY93/U2cXCfEMBESYnDJUevcjJ208sXav23S.K8elE/J6Sxr4w5jO",0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO gaman_banking.users(id,name,role,password,delete_flg,created_at,updated_at)
+     VALUES (null,"taro","GENERAL","$2a$10$HPIjRCymeRZKEIq.71TDduiEotOlb8Ai6KQUHCs4lGNYlLhcKv4Wi",0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO gaman_banking.users(id,name,role,password,delete_flg,created_at,updated_at)
+     VALUES (null,"naotake","GENERAL","$2a$10$rX2DEJ4bpu7jyOobgECaXOoJyehmqP7Y4oNTQruXb43/mI5G0NFU.",0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 INSERT INTO gaman_banking.categories(id,name,delete_flg,created_at,updated_at)
      VALUES (null,"お菓子",0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 INSERT INTO gaman_banking.categories(id,name,delete_flg,created_at,updated_at)

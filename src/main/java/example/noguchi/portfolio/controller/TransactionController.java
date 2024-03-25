@@ -41,7 +41,7 @@ public class TransactionController {
     public String home(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction,@ModelAttribute("message") String message) {
         // ユーザーの残高表示用＆桁区切り変換
         Integer userId = userDetail.getEmployee().getId();
-        // ユーザーネーム表示用
+        // ユーザID表示用
         model.addAttribute("loginUser", userService.findById(userId));
         model.addAttribute("totalBalance", String.format("%,d 円",transactionService.getTotalBalance(userId)));
         // カテゴリ選択用リスト
@@ -87,7 +87,7 @@ public class TransactionController {
     public String withdrawView(Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction) {
         // ユーザーの残高表示用＆桁区切り変換
         Integer userId = userDetail.getEmployee().getId();
-        // ユーザーネーム表示用
+        // ユーザーID表示用
         model.addAttribute("loginUser", userService.findById(userId));
         String totalBalance = String.format("%,d 円",transactionService.getTotalBalance(userId));
         if (totalBalance == null) {

@@ -16,8 +16,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
@@ -64,15 +62,6 @@ public class User {
     @Length(min=4,max = 20,message="4文字～20文字で入力してください",groups= {UsernameValidation.class})
     @Length(min=4,max = 20,message="4文字～20文字で入力してください")
     private String name;
-
-    // メールアドレス
-    @Column(length = 255, nullable = false)
-    @Email(groups= {MailAddressValidation.class})
-    @Email
-    @NotEmpty(groups= {MailAddressValidation.class})
-    @NotEmpty
-    @Length(max = 100)
-    private String mailAddress;
 
     // 権限
     @Column(columnDefinition="VARCHAR(10)", nullable = false)

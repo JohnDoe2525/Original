@@ -4,14 +4,10 @@ package example.noguchi.portfolio.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import example.noguchi.portfolio.entity.Transaction;
 import example.noguchi.portfolio.entity.User;
 import example.noguchi.portfolio.repository.TransactionRepository;

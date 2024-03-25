@@ -9,9 +9,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-
 import example.noguchi.portfolio.entity.User;
 import example.noguchi.portfolio.entity.User.Role;
 import example.noguchi.portfolio.repository.UserRepository;
@@ -70,8 +67,6 @@ public class UserService {
             baseUser.setName(user.getName());
         } else if(user.getPassword() != null) {
             baseUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        } else if(user.getMailAddress() != null) {
-            baseUser.setMailAddress(user.getMailAddress());
         }
         LocalDateTime now = LocalDateTime.now();
         user.setUpdatedAt(now);

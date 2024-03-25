@@ -90,14 +90,6 @@
               id="password"
             />
             <span th:errors="*{confirmPassword}" class="text-danger"></span>
-            <label for="code">メールアドレス</label>
-            <input
-              th:field="*{mailAddress}"
-              th:errorclass="err"
-              type="text"
-              id="code"
-            />
-            <span th:errors="*{mailAddress}" class="text-danger"></span>
             <div class="common-submit">
               <input type="submit" value="登録" class="btn" />
               <a th:href="@{/login}" class="btn">戻る</a>

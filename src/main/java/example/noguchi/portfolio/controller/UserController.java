@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import example.noguchi.portfolio.entity.User;
-import example.noguchi.portfolio.entity.User.MailAddressValidation;
 import example.noguchi.portfolio.entity.User.PasswordValidation;
 import example.noguchi.portfolio.entity.User.UsernameValidation;
 import example.noguchi.portfolio.service.UserDetail;
@@ -89,7 +88,7 @@ public class UserController {
         return "user/update_password";
     }
     // メールアドレス変更画面を表示
-    @GetMapping(value = "/setting/menu/userinfo/mailaddress/{id}")
+/*     @GetMapping(value = "/setting/menu/userinfo/mailaddress/{id}")
     public String mailAddress(@PathVariable("id") Integer id,Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute User user ) {
         if (id == null) {
             Integer userid = userDetail.getEmployee().getId();
@@ -99,7 +98,7 @@ public class UserController {
             model.addAttribute("user", userService.findById(id));
         }
         return "user/update_mailaddress";
-    }
+    } */
     // ユーザーID更新処理
     @PostMapping(value = "/setting/user/update/username")
     public String updateUserName(@Validated(UsernameValidation.class) User user,BindingResult res,Model model,@AuthenticationPrincipal UserDetail userDetail) {
@@ -127,7 +126,7 @@ public class UserController {
         userService.update(user,userDetail);
         return "redirect:/gamanbanking/setting/menu/userinfo";
     }
-    // メールアドレス更新処理
+/*     // メールアドレス更新処理
     @PostMapping(value = "/setting/user/update/mailaddress")
     public String updateMailAddress(@Validated(MailAddressValidation.class) User user,BindingResult res,Model model,@AuthenticationPrincipal UserDetail userDetail) {
         // 入力チェック
@@ -136,5 +135,5 @@ public class UserController {
         }
         userService.update(user,userDetail);
         return "redirect:/gamanbanking/setting/menu/userinfo";
-    }
+    } */
 }
