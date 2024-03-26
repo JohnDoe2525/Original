@@ -1,70 +1,97 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
-<head class="container">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{/css/nomalize.css}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <head class="container">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/css/nomalize.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-    <link rel="stylesheet" th:href="@{/css/style-mobile.css}">
-    <link rel="stylesheet" th:href="@{/css/popup.css}">
-</head>
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/style-mobile.css}" />
+    <link rel="stylesheet" th:href="@{/css/popup.css}" />
+  </head>
 
-<body>
+  <body>
     <header>
-        <div class="header-top">
-            <div class="header-icon">GamanBanking</div>
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" value="ログアウト" class="logout-btn">
-            </form>
-        </div>
-        <div class="header-logo">GB</div>
-        <nav class="header-nav">
-            <ul class="header-nav-menu">
-                <li class=header-nav-menu-item><a th:href="@{/gamanbanking/home}">ホーム</a></li>
-                <li class=header-nav-menu-item><a th:href="@{/gamanbanking/home/withdraw}">出金</a></li>
-                <li class=header-nav-menu-item><a th:href="@{/gamanbanking/home/list}">通帳</a></li>
-                <li class=header-nav-menu-item><a
-                        th:href="@{/gamanbanking/home/statistics/{id}(id=${loginUser.id})}">統計</a></li>
-                <li class=header-nav-menu-item><a th:href="@{/gamanbanking/setting/menu/userinfo}">設定</a></li>
-            </ul>
-        </nav>
+      <div class="header-top">
+        <div class="header-icon">GamanBanking</div>
+        <form th:action="@{/logout}" method="post">
+          <input type="submit" value="ログアウト" class="logout-btn" />
+        </form>
+      </div>
+      <div class="header-logo">GB</div>
+      <nav class="header-nav">
+        <ul class="header-nav-menu">
+          <li class="header-nav-menu-item">
+            <a th:href="@{/gamanbanking/home}">ホーム</a>
+          </li>
+          <li class="header-nav-menu-item">
+            <a th:href="@{/gamanbanking/home/withdraw}">出金</a>
+          </li>
+          <li class="header-nav-menu-item">
+            <a th:href="@{/gamanbanking/home/list}">通帳</a>
+          </li>
+          <li class="header-nav-menu-item">
+            <a
+              th:href="@{/gamanbanking/home/statistics/{id}(id=${loginUser.id})}"
+              >統計</a
+            >
+          </li>
+          <li class="header-nav-menu-item">
+            <a th:href="@{/gamanbanking/setting/menu/userinfo}">設定</a>
+          </li>
+        </ul>
+      </nav>
     </header>
     <main>
-        <div class="container">
-            <div class="main-display-username" th:text="${loginUser.name}+' さんの通帳（取引履歴）'"></div>
-            <table class="balance-table">
-                <thead>
-                    <tr>
-                        <th>日付</th>
-                        <th>カテゴリ</th>
-                        <th>金額</th>
-                        <th>残高</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="tran,status : ${transactionList}">
-                        <td th:text="${#temporals.format(tran.transactionDate,'yyyy-MM-dd')}" class="td-data"></td>
-                        <td th:text="${tran.category.name}" class="td-category"></td>
-                        <td th:text="${tran.price}" class="td-price"></td>
-                        <td class="td-total">
-                            <span th:text="${balanceList[status.index]}"></span>
-                        </td>
-                        <td class="td-url"><a th:href="@{/gamanbanking/home/detail/{id}(id=${tran.transactionId})}">編集</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+      <div class="container">
+        <div
+          class="main-display-username"
+          th:text="${loginUser.name}+' さんの通帳（取引履歴）'"
+        ></div>
+        <table class="balance-table">
+          <thead>
+            <tr>
+              <th>日付</th>
+              <th>カテゴリ</th>
+              <th>金額</th>
+              <th>残高</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="tran,status : ${transactionList}">
+              <td
+                th:text="${#temporals.format(tran.transactionDate,'yyyy-MM-dd')}"
+                class="td-data"
+              ></td>
+              <td th:text="${tran.category.name}" class="td-category"></td>
+              <td
+                th:text="${#numbers.formatInteger(tran.price,3,'COMMA')}"
+                class="td-price"
+              ></td>
+              <td class="td-total">
+                <span
+                  th:text="${#numbers.formatInteger(balanceList[status.index],3,'COMMA')}"
+                ></span>
+              </td>
+              <td class="td-url">
+                <a
+                  th:href="@{/gamanbanking/home/detail/{id}(id=${tran.transactionId})}"
+                  >編集</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </main>
     <footer>
-        <small>©GamanBanking</small>
+      <small>©GamanBanking</small>
     </footer>
-</body>
-
+  </body>
 </html>

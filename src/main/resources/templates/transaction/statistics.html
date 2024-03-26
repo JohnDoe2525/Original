@@ -52,21 +52,21 @@
                     <tbody>
                         <tr>
                             <td class="td-title">残高</td>
-                            <td th:text="${averageBalance}"></td>
-                            <td th:text="${topBalance}"></td>
-                            <td th:text="${myBalance}"></td>
+                            <td th:text="${#numbers.formatInteger(averageBalance,3,'COMMA')}"></td>
+                            <td th:text="${#numbers.formatInteger(topBalance,3,'COMMA')}"></td>
+                            <td th:text="${#numbers.formatInteger(myBalance,3,'COMMA')}"></td>
                         </tr>
                         <tr>
                             <td class="td-title">最多残高</td>
-                            <td th:text="${averageBestBalance}"></td>
-                            <td th:text="${topBestBalance}"></td>
-                            <td th:text="${myBestBalance}"></td>
+                            <td th:text="${#numbers.formatInteger(averageBestBalance,3,'COMMA')}"></td>
+                            <td th:text="${#numbers.formatInteger(topBestBalance,3,'COMMA')}"></td>
+                            <td th:text="${#numbers.formatInteger(myBestBalance,3,'COMMA')}"></td>
                         </tr>
                         <tr>
                             <td class="td-title">入金回数</td>
-                            <td th:text="${averageCountPayment}"></td>
-                            <td th:text="${topCountPayment}"></td>
-                            <td th:text="${myCountPayment}"></td>
+                            <td th:text="${#numbers.formatInteger(averageCountPayment,3,'COMMA')}"></td>
+                            <td th:text="${#numbers.formatInteger(topCountPayment,3,'COMMA')}"></td>
+                            <td th:text="${#numbers.formatInteger(myCountPayment,3,'COMMA')}"></td>
                         </tr>
                     </tbody>
                 </table>
