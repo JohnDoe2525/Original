@@ -144,12 +144,11 @@ footer {
 }
 
 .main-display-container {
-  display: flex;
   width: 100%;
   border: 1px solid #cccccc;
-  padding: 10px 50px;
+  padding: 10px 20px 10px;
   margin-bottom: 10px;
-  justify-content: right;
+  text-align: right;
 }
 
 .main-display-total {

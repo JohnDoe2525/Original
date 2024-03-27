@@ -64,9 +64,9 @@
                         </tr>
                         <tr>
                             <td class="td-title">入金回数</td>
-                            <td th:text="${#numbers.formatInteger(averageCountPayment,3,'COMMA')}"></td>
-                            <td th:text="${#numbers.formatInteger(topCountPayment,3,'COMMA')}"></td>
-                            <td th:text="${#numbers.formatInteger(myCountPayment,3,'COMMA')}"></td>
+                            <td th:text="${averageCountPayment}"></td>
+                            <td th:text="${topCountPayment}"></td>
+                            <td th:text="${myCountPayment}"></td>
                         </tr>
                     </tbody>
                 </table>
