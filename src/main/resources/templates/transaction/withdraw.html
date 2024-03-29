@@ -69,10 +69,8 @@
             <div class="main-tran-container">
                 <form th:action="@{/gamanbanking/home/withdraw/add}" th:method="post" 　th:object="${transaction}">
                     <div class="main-tran-category">
-
-                        <label cfor="category">カテゴリ選択</label>
-
                         <div class="main-tran-category-select">
+                            <label for="category">カテゴリ選択</label>
                             <select th:field="*{category.id}" id="category">
                                 <option class="form-control" value="" th:text="選択してください"></option>
                                 <option class="form-control" th:each="item:${categoryList}" th:value="${item.id}"

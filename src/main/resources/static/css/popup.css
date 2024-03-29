@@ -1,5 +1,5 @@
 #popup-wrapper {
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
   left: 0;
@@ -11,32 +11,34 @@
 
 #popup-inside {
   text-align: center;
-  width: 100%;
+  width: 80%;
   max-width: 300px;
-  height:150px;
+  height: 150px;
   background: white;
-  margin: 10% auto;
+  margin: 60% auto;
   padding: 20px;
   position: relative;
+  border-radius: 3px;
 }
 
-#message{
-    margin-top: 15px;
+#message {
+  margin-top: 15px;
 }
 
 #message a {
-  background: #0d6efd;
+  background: #65b741;
   color: white;
   text-decoration: none;
   padding: 6px 10px;
   position: absolute;
-  bottom:25px;
+  bottom: 25px;
   transform: translateX(-50%);
+  border-radius: 3px;
 }
 
 #close {
   position: absolute;
-  top: 0;
-  right: 5px;
+  top: 5px;
+  right: 10px;
   cursor: pointer;
 }

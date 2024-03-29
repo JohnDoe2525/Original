@@ -141,7 +141,10 @@ public class TransactionController {
 
     // 編集画面
     @GetMapping(value = "/home/detail/{id}")
-    public String detail(@PathVariable("id") Integer id,Model model,@ModelAttribute Transaction transaction) {
+    public String detail(@PathVariable("id") Integer id,Model model,@AuthenticationPrincipal UserDetail userDetail,@ModelAttribute Transaction transaction) {
+        Integer userid = userDetail.getEmployee().getId();
+        User user = userService.findById(userid);
+        model.addAttribute("loginUser", user);
         model.addAttribute("categoryList",categoryService.getAllCategory());
         if(id == null) {
             model.addAttribute("transaction", transaction);
@@ -156,7 +159,7 @@ public class TransactionController {
     public String update(@PathVariable("id") Integer id,Model model,@Validated Transaction transaction,BindingResult res,@AuthenticationPrincipal UserDetail userDetail,RedirectAttributes redirectAttributes) {
         // 入力チェック
         if(res.hasErrors()) {
-            return detail(null,model,transaction);
+            return detail(null,model,userDetail,transaction);
         }
         // 残高チェック
         Integer userId = userDetail.getEmployee().getId();
@@ -164,7 +167,7 @@ public class TransactionController {
         Integer target = totalBalance + transaction.getPrice();
         if(target < -999999999 || target > 999999999) {
             model.addAttribute("limitError","残高が制限に達しています");
-            return detail(null,model,transaction);
+            return detail(null,model,userDetail,transaction);
         }
         redirectAttributes.addFlashAttribute("message", "変更が完了しました");
         transactionService.update(id,transaction);

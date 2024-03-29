@@ -70,9 +70,10 @@
                 <form th:action="@{/gamanbanking/home/add}" th:method="post"  th:object="${transaction}">
                     <div class="main-tran-category">
 
-                            <label cfor="category">何を買うのをガマンしましたか？</label>
+                            
 
                         <div class="main-tran-category-select">
+                            <label for="category">何を買うのをガマンしましたか？</label>
                             <select th:field="*{category.id}" id="category">
                                 <option class="form-control" value=""  th:text="選択してください"></option>
                                 <option class="form-control" th:each="item:${categoryList}" th:value="${item.id}"

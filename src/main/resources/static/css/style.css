@@ -245,6 +245,21 @@ td {
   text-align: center;
 }
 
+/* 取引編集画面 */
+.edit-submit {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.edit-date {
+  margin-bottom: 15px;
+}
+
+.edit-submit input:last-child {
+  margin-left: 20px;
+}
+
 /* 統計画面 */
 
 .table-label {
