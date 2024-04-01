@@ -52,7 +52,9 @@ label {
   margin-bottom: 10px;
 }
 
-input {
+/* inputのスタイルを削除 */
+
+.input-container {
   margin-bottom: 15px;
 }
 
@@ -171,6 +173,7 @@ footer {
 .text-danger {
   display: block;
   color: red;
+  margin-top: 5px;
   margin-bottom: 10px;
   font-size: 1.1rem;
 }

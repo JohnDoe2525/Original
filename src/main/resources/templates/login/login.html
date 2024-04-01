@@ -28,13 +28,17 @@
         </div>
         <div class="common-container">
           <form th:action="@{/login}" th:method="post">
-            <label for="username">ユーザーID</label>
-            <input id="username" name="username" />
-            <label for="password">パスワード</label>
-            <input type="password" id="password" name="password" />
-            <span class="text-danger" th:if="${param.error}"
-              >ユーザーIDまたはパスワードが正しくありません</span
-            >
+            <div class="input-container">
+              <label for="username">ユーザーID</label>
+              <input id="username" name="username" />
+            </div>
+            <div class="input-container">
+              <label for="password">パスワード</label>
+              <input type="password" id="password" name="password" />
+              <span class="text-danger" th:if="${param.error}"
+                >ユーザーIDまたはパスワードが正しくありません</span
+              >
+            </div>
             <div class="common-submit">
               <input
                 type="submit"
