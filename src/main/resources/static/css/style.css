@@ -56,6 +56,10 @@ label {
   margin-bottom: 15px;
 }
 
+/*.input-container:last-child {
+  margin-bottom: 30px;
+}*/
+
 .btn {
   display: inline-block;
   padding: 10px 20px;

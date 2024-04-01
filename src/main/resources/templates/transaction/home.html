@@ -73,13 +73,13 @@
 
                     <div class="input-container">       
                     <label for="category">何を買うのをガマンしましたか？</label>
-                            <select th:field="*{category.id}" id="category">
-                                <option class="form-control" value=""  th:text="選択してください"></option>
-                                <option class="form-control" th:each="item:${categoryList}" th:value="${item.id}"
-                                    th:text="${item.name}" id="category"></option>
-                            </select>
-                            <span th:if="${categoryError != null}" th:text="${categoryError}"
-                                class="text-danger"></span>
+                        <select th:field="*{category.id}" id="category">
+                            <option class="form-control" value=""  th:text="選択してください"></option>
+                            <option class="form-control" th:each="item:${categoryList}" th:value="${item.id}"
+                                th:text="${item.name}" id="category"></option>
+                        </select>
+                        <span th:if="${categoryError != null}" th:text="${categoryError}"
+                            class="text-danger"></span>
                     </div>
                     <div class="input-container">
                         <label class="form-label" for="price">金額</label>

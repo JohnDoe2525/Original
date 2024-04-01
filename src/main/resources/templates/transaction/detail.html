@@ -69,14 +69,14 @@
                     <input type="hidden" th:field="*{transactionDate}"
                             th:text="*{#temporals.format(transactionDate,'yyyy-MM-dd')}" id="date">
                 </div>
-                <div class="edit-price">
+                <div class="input-container">
                     <label class="label" for="price">金額</label>
                         <input type="text" th:field="*{price}" th:errorclass="err" id="price"
                             maxlength="9"/>
                         <span th:errors="*{price}" class="text-danger"></span>
                         <span th:if="${limitError != null}" th:text="${limitError}" class="text-danger"></span>
                 </div>
-                <div class="edit-category">
+                <div class="input-container">
                     <label class="label" for="category">カテゴリ選択</label>
                     <select th:field="*{category.id}" id="category">
                         <option th:each="item:${categoryList}" th:value="${item.id}"
@@ -84,7 +84,7 @@
                         </option>
                     </select>
                 </div>
-                <div class="edit-memo">
+                <div class="input-container">
                     <label class="label" for="memo">メモ</label>
                     <input type="text" th:field="*{memo}" th:errorclass="err"
                         id="memo"></input>
