@@ -85,20 +85,22 @@
           >
             <label class="form-label">現在のユーザーID</label>
             <p class="mb-1" th:text="*{name}"></p>
-            <label class="form-label" for="name">変更後のユーザーID</label>
-            <input
-              class="form-control"
-              id="name"
-              name="name"
-              type="text"
-              ,th:errorclass="err"
-            />
-            <span th:errors="*{name}" class="text-danger"></span>
-            <span
-              th:if="${existsError != null}"
-              th:text="${existsError}"
-              class="text-danger"
-            ></span>
+            <div class="input-container">
+              <label class="form-label" for="name">変更後のユーザーID</label>
+              <input
+                class="form-control"
+                id="name"
+                name="name"
+                type="text"
+                ,th:errorclass="err"
+              />
+              <span th:errors="*{name}" class="text-danger"></span>
+              <span
+                th:if="${existsError != null}"
+                th:text="${existsError}"
+                class="text-danger"
+              ></span>
+            </div>
             <div class="common-submit">
               <input type="submit" value="変更" class="btn" />
               <a th:href="@{/gamanbanking/setting/menu/userinfo}" class="btn"
