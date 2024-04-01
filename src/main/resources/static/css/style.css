@@ -52,13 +52,7 @@ label {
   margin-bottom: 10px;
 }
 
-/* inputのスタイルを削除 */
-
 .input-container {
-  margin-bottom: 15px;
-}
-
-select {
   margin-bottom: 15px;
 }
 
