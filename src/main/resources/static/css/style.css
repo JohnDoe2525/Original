@@ -52,9 +52,7 @@ label {
   margin-bottom: 10px;
 }
 
-input {
-  margin-bottom: 15px;
-}
+/* inputのスタイルを削除 */
 
 select {
   margin-bottom: 15px;
@@ -172,6 +170,7 @@ footer {
   display: block;
   color: red;
   margin-bottom: 10px;
+  font-size: 1.1rem;
 }
 
 .page-title {
