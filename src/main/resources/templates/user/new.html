@@ -61,35 +61,41 @@
             th:object="${user}"
             th:method="post"
           >
-            <label for="name">ユーザーID</label>
-            <input
-              th:field="*{name}"
-              th:errorclass="err"
-              type="text"
-              id="name"
-            />
-            <span th:errors="*{name}" class="text-danger"></span>
-            <span
-              th:if="${existsError != null}"
-              th:text="${existsError}"
-              class="text-danger"
-            ></span>
-            <label for="password">パスワード</label>
-            <input
-              th:field="*{password}"
-              th:errorclass="err"
-              type="password"
-              id="password"
-            />
-            <span th:errors="*{password}" class="text-danger"></span>
-            <label for="password">パスワード(確認用)</label>
-            <input
-              th:field="*{confirmPassword}"
-              th:errorclass="err"
-              type="password"
-              id="password"
-            />
-            <span th:errors="*{confirmPassword}" class="text-danger"></span>
+            <div class="input-container">
+              <label for="name">ユーザーID</label>
+              <input
+                th:field="*{name}"
+                th:errorclass="err"
+                type="text"
+                id="name"
+              />
+              <span th:errors="*{name}" class="text-danger"></span>
+              <span
+                th:if="${existsError != null}"
+                th:text="${existsError}"
+                class="text-danger"
+              ></span>
+            </div>
+            <div class="input-container">
+              <label for="password">パスワード</label>
+              <input
+                th:field="*{password}"
+                th:errorclass="err"
+                type="password"
+                id="password"
+              />
+              <span th:errors="*{password}" class="text-danger"></span>
+            </div>
+            <div class="input-container">
+              <label for="password">パスワード(確認用)</label>
+              <input
+                th:field="*{confirmPassword}"
+                th:errorclass="err"
+                type="password"
+                id="password"
+              />
+              <span th:errors="*{confirmPassword}" class="text-danger"></span>
+            </div>
             <div class="common-submit">
               <input type="submit" value="登録" class="btn" />
               <a th:href="@{/login}" class="btn">戻る</a>
