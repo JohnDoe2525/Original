@@ -68,49 +68,34 @@
             </div>
             <div class="main-tran-container">
                 <form th:action="@{/gamanbanking/home/withdraw/add}" th:method="post" 　th:object="${transaction}">
-                    <div class="main-tran-category">
-                        <div class="main-tran-category-select">
-                            <label for="category">カテゴリ選択</label>
-                            <select th:field="*{category.id}" id="category">
-                                <option class="form-control" value="" th:text="選択してください"></option>
-                                <option class="form-control" th:each="item:${categoryList}" th:value="${item.id}"
-                                    th:text="${item.name}" id="category"></option>
-                            </select>
-                        </div>
-                        <div class="alert">
-                            <span th:if="${categoryError != null}" th:text="${categoryError}"
-                                class="text-danger"></span>
-                        </div>
+                    <div class="input-container">
+                        <label for="category">カテゴリ選択</label>
+                        <select th:field="*{category.id}" id="category">
+                            <option class="form-control" value="" th:text="選択してください"></option>
+                            <option class="form-control" th:each="item:${categoryList}" th:value="${item.id}"
+                                th:text="${item.name}" id="category"></option>
+                        </select>
+                        <span th:if="${categoryError != null}" th:text="${categoryError}"
+                            class="text-danger"></span>
                     </div>
-                    <div class="main-tran-price">
+                    <div class="input-container">
 
                         <label class="form-label" for="price">金額</label>
 
-                        <div class="main-tran-price-input">
                             <input type="text" th:field="*{price}" th:errorclass="err" id="price" maxlength="9">
-                        </div>
-                        <div class="alert">
                             <span th:errors="*{price}" class="text-danger"></span>
                             <span th:if="${limitError != null}" th:text="${limitError}" class="text-danger"></span>
-                        </div>
                     </div>
-                    <div class="main-tran-memo">
-
-                        <label class="form-label mt-2" for="memo">memo</label>
-
-                        <div class="main-tran-memo-input">
-                            <input class="form-control" type="text" th:field="*{memo}" th:errorclass="err"
-                                id="memo"></input>
-                        </div>
-                        <div class="alert">
-                            <span th:errors="*{memo}" class="text-danger"></span>
-                        </div>
+                    <div class="input-container">
+                        <label class="form-label" for="memo">memo</label>
+                        <input class="form-control" type="text" th:field="*{memo}" th:errorclass="err"
+                            id="memo"></input>
+                        <span th:errors="*{memo}" class="text-danger"></span>
                     </div>
                     <div class="main-tran-submit">
                         <input type="submit" value="出金する" class="btn">
                     </div>
                 </form>
-
             </div>
             <div id="popup-wrapper" th:if="${message != null}">
                 <div id="popup-inside">
