@@ -13,6 +13,34 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <link rel="stylesheet" th:href="@{/css/style-mobile.css}" />
     <link rel="stylesheet" th:href="@{/css/popup.css}" />
+    <script th:inline="javascript">
+      document.addEventListener("DOMContentLoaded", function () {
+        // サーバーからメッセージを取得
+        const serverMessage = /*[[${message}]]*/ null;
+        const popupWrapper = document.getElementById("popup-wrapper");
+        const close = document.getElementById("close");
+        // メッセージがあればポップアップを表示
+        if (serverMessage) {
+          // ポップアップにメッセージを表示する処理
+          // document.getElementById('message').innerHTML = "<h2>" + serverMessage + "</h2>";
+          // ポップアップを表示
+          showPopup();
+        }
+        // ポップアップを表示する関数
+        function showPopup() {
+          document.getElementById("popup-wrapper").style.display = "block";
+        }
+        popupWrapper.addEventListener("click", (e) => {
+          if (
+            e.target.id === popupWrapper.id ||
+            e.target.id === close.id ||
+            e.target.id === OK.id
+          ) {
+            popupWrapper.style.display = "none";
+          }
+        });
+      });
+    </script>
   </head>
 
   <body>
@@ -88,6 +116,15 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <div id="popup-wrapper" th:if="${message != null}">
+        <div id="popup-inside">
+          <div id="close">x</div>
+          <div id="message">
+            <h4 th:text="${message}"></h4>
+            <a id="OK" href="#" th:text="OK"></a>
+          </div>
+        </div>
       </div>
     </main>
     <footer>

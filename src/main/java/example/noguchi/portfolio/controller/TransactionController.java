@@ -124,7 +124,7 @@ public class TransactionController {
         transaction.setUser(userDetail.getEmployee());
         transactionService.save(transaction);
         redirectAttributes.addFlashAttribute("message", "出金が完了しました");
-        return "redirect:/gamanbanking/home";
+        return "redirect:/gamanbanking/home/withdraw";
     }
 
     // 通帳画面表示
@@ -146,6 +146,7 @@ public class TransactionController {
         User user = userService.findById(userid);
         model.addAttribute("loginUser", user);
         model.addAttribute("categoryList",categoryService.getAllCategory());
+        // 入力がエラーだった場合
         if(id == null) {
             model.addAttribute("transaction", transaction);
         } else {

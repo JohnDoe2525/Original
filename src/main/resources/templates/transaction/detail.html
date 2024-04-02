@@ -13,29 +13,6 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/style-mobile.css}">
     <link rel="stylesheet" th:href="@{/css/popup.css}">
-    <script th:inline="javascript">document.addEventListener('DOMContentLoaded', function () {
-            // サーバーからメッセージを取得
-            const serverMessage = /*[[${message}]]*/ null;
-            const popupWrapper = document.getElementById('popup-wrapper');
-            const close = document.getElementById('close');
-            // メッセージがあればポップアップを表示
-            if (serverMessage) {
-                // ポップアップにメッセージを表示する処理
-                // document.getElementById('message').innerHTML = "<h2>" + serverMessage + "</h2>";
-                // ポップアップを表示
-                showPopup();
-            }
-            // ポップアップを表示する関数
-            function showPopup() {
-                document.getElementById('popup-wrapper').style.display = 'block';
-            }
-            popupWrapper.addEventListener('click', e => {
-                if (e.target.id === popupWrapper.id || e.target.id === close.id || e.target.id === OK.id) {
-                    popupWrapper.style.display = 'none';
-                }
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -62,51 +39,42 @@
         <div class="container">
             <div class="setting-title">取引履歴編集</div>
             <div class="setting-main">
-            <form th:action="@{/gamanbanking/home/update/{id}(id=*{transactionId})}" th:method="post"
-                         th:object="${transaction}" id="edit">
-                <div class="edit-date">
-                    <label class="label" for="date">日付</label>
-                    <input type="hidden" th:field="*{transactionDate}"
-                            th:text="*{#temporals.format(transactionDate,'yyyy-MM-dd')}" id="date">
-                </div>
-                <div class="input-container">
-                    <label class="label" for="price">金額</label>
-                        <input type="text" th:field="*{price}" th:errorclass="err" id="price"
-                            maxlength="9"/>
-                        <span th:errors="*{price}" class="text-danger"></span>
-                        <span th:if="${limitError != null}" th:text="${limitError}" class="text-danger"></span>
-                </div>
-                <div class="input-container">
-                    <label class="label" for="category">カテゴリ選択</label>
-                    <select th:field="*{category.id}" id="category">
-                        <option th:each="item:${categoryList}" th:value="${item.id}"
-                            th:text="${item.name}" id="category" th:selected="*{category.id} == ${item.id}">
-                        </option>
-                    </select>
-                </div>
-                <div class="input-container">
-                    <label class="label" for="memo">メモ</label>
-                    <input type="text" th:field="*{memo}" th:errorclass="err"
-                        id="memo"></input>
-                    <span th:errors="*{memo}" class="text-danger"></span>
-                </div>
-            </form>
-            <form th:action="@{/gamanbanking/home/delete/{id}(id=${transaction.transactionId})}" th:method="post">
-                <div class="edit-submit">
-                    <input type="submit" value="変更" class="btn" form="edit">
-                    <input type="submit" value="削除" class="btn">
-                </div>
-            </form>
-        </div>
-        <div id="popup-wrapper" th:if="${message != null}">
-            <div id="popup-inside">
-                <div id="close">x</div>
-                <div id="message">
-                    <h4 th:text="${message}"></h4>
-                    <a id="OK" href="#" th:text="OK"></a>
-                </div>
+                <form th:action="@{/gamanbanking/home/update/{id}(id=*{transactionId})}" th:method="post"
+                            th:object="${transaction}" id="edit">
+                    <div class="edit-date">
+                        <label class="label" for="date">日付</label>
+                        <input type="hidden" th:field="*{transactionDate}"
+                                th:text="*{#temporals.format(transactionDate,'yyyy-MM-dd')}" id="date">
+                    </div>
+                    <div class="input-container">
+                        <label class="label" for="price">金額</label>
+                            <input type="text" th:field="*{price}" th:errorclass="err" id="price"
+                                maxlength="9"/>
+                            <span th:errors="*{price}" class="text-danger"></span>
+                            <span th:if="${limitError != null}" th:text="${limitError}" class="text-danger"></span>
+                    </div>
+                    <div class="input-container">
+                        <label class="label" for="category">カテゴリ選択</label>
+                        <select th:field="*{category.id}" id="category">
+                            <option th:each="item:${categoryList}" th:value="${item.id}"
+                                th:text="${item.name}" id="category" th:selected="*{category.id} == ${item.id}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-container">
+                        <label class="label" for="memo">メモ</label>
+                        <input type="text" th:field="*{memo}" th:errorclass="err"
+                            id="memo"></input>
+                        <span th:errors="*{memo}" class="text-danger"></span>
+                    </div>
+                </form>
+                <form th:action="@{/gamanbanking/home/delete/{id}(id=${transaction.transactionId})}" th:method="post">
+                    <div class="edit-submit">
+                        <input type="submit" value="変更" class="btn" form="edit">
+                        <input type="submit" value="削除" class="btn">
+                    </div>
+                </form>
             </div>
-        </div>
         </div>
     </main>
     <footer>
