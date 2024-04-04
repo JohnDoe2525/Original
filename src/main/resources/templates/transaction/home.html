@@ -46,7 +46,6 @@
                 <input type="submit" value="ログアウト" class="logout-btn">
             </form>
         </div>
-        <div class="header-logo"><img src="Original\src\main\resources\pictures\Pastel Blue Beige Lifestyle Editorial General News Logo.png"></div>
         <nav class="header-nav">
             <ul class="header-nav-menu">
                 <li class=header-nav-menu-item><a th:href="@{/gamanbanking/home}">ホーム</a></li>
@@ -68,9 +67,6 @@
             </div>
             <div class="main-tran-container">
                 <form th:action="@{/gamanbanking/home/add}" th:method="post"  th:object="${transaction}">
-
-                            
-
                     <div class="input-container">       
                     <label for="category">何を買うのをガマンしましたか？</label>
                         <select th:field="*{category.id}" id="category">
