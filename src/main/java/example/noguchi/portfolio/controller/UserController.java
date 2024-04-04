@@ -43,7 +43,7 @@ public class UserController {
 
     // 新規登録処理
     @PostMapping(value = "/add")
-    public String add(@Validated(UsernameValidation.class) User user,BindingResult res,Model model) {
+    public String add(@Validated(UsernameValidation.class) User user,BindingResult res,Model model,RedirectAttributes redirectAttributes) {
         // 入力チェック
         if (res.hasErrors()) {
             return create(user,model);
@@ -53,6 +53,7 @@ public class UserController {
             return create(user,model);
         }
         userService.save(user);
+        redirectAttributes.addFlashAttribute("message", "登録が完了しました");
         return "redirect:/login";
     }
 
