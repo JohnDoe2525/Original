@@ -32,12 +32,13 @@ public class UserController {
 
     // 新規登録画面を表示
     @GetMapping(value = "/new")
-    public String create(User user,Model model) {
+    public String create(User user,Model model,@ModelAttribute("message") String message) {
         model.addAttribute("user", user);
         // 重複チェック
         if (userService.useridExists(user)) {
            model.addAttribute("existsError", "このユーザーIDは既に使われています");
         }
+        model.addAttribute("message", message);
         return "user/new";
     }
 
@@ -46,15 +47,15 @@ public class UserController {
     public String add(@Validated(UsernameValidation.class) User user,BindingResult res,Model model,RedirectAttributes redirectAttributes) {
         // 入力チェック
         if (res.hasErrors()) {
-            return create(user,model);
+            return create(user,model,null);
         }
         // 重複チェック
         if (userService.useridExists(user)) {
-            return create(user,model);
+            return create(user,model,null);
         }
         userService.save(user);
-        redirectAttributes.addFlashAttribute("message", "登録が完了しました");
-        return "redirect:/login";
+        redirectAttributes.addFlashAttribute("message", "登録が完了しました、ログイン画面に戻ります");
+        return "redirect:/gamanbanking/new";
     }
 
     // ユーザー情報確認変更画面を表示

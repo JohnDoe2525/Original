@@ -37,6 +37,7 @@
             e.target.id === OK.id
           ) {
             popupWrapper.style.display = "none";
+            location.href = "http://localhost:8080/login";
           }
         });
       });
@@ -100,6 +101,15 @@
               <a th:href="@{/login}" class="btn">戻る</a>
             </div>
           </form>
+        </div>
+      </div>
+      <div id="popup-wrapper" th:if="${message != null}">
+        <div id="popup-inside">
+          <div id="close">x</div>
+          <div id="message">
+            <h4 th:text="${message}"></h4>
+            <a id="OK" href="#" th:text="OK"></a>
+          </div>
         </div>
       </div>
     </main>
