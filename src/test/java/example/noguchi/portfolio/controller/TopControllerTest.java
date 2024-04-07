@@ -1,5 +1,8 @@
 package example.noguchi.portfolio.controller;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,15 +31,29 @@ class TopControllerTest {
     }
 
     @Test
+    @DisplayName("登録済みのユーザーがログインしようとした場合(認証)")
+    public void testTop04() throws Exception {
+        mockMvc.perform(formLogin().user("admin").password("kirataro"))
+                .andExpect(authenticated());
+    }
+
+    @Test
+    @DisplayName("未登録のユーザーがログインしようとした場合(認証)")
+    public void testTop03() throws Exception {
+        mockMvc.perform(formLogin().user("admin").password("admin"))
+                .andExpect(unauthenticated());
+    }
+
+    @Test
     @WithMockUser
-    @DisplayName("登録済みのユーザーがログインしようとした場合")
+    @DisplayName("登録済みのユーザーがログインしようとした場合(認可)")
     public void testTop01() throws Exception {
         mockMvc.perform(get("/"))
         .andExpect(redirectedUrl("/gamanbanking/home"));
     }
 
     @Test
-    @DisplayName("未登録のユーザーがログインしようとした場合")
+    @DisplayName("未登録のユーザーがログインしようとした場合(認可)")
     public void testTop02() throws Exception {
         mockMvc.perform(get("/"))
         .andExpect(redirectedUrl("http://localhost/login"));
