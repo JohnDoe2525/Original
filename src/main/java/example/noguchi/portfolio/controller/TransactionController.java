@@ -42,7 +42,7 @@ public class TransactionController {
         // ユーザーの残高表示用＆桁区切り変換
         Integer userId = userDetail.getEmployee().getId();
         // ユーザID表示用
-        model.addAttribute("loginUser", userService.findById(userId));
+        model.addAttribute("loginUser", userDetail.getEmployee());
         model.addAttribute("totalBalance", String.format("%,d 円",transactionService.getTotalBalance(userId)));
         // カテゴリ選択用リスト
         model.addAttribute("categoryList",categoryService.getAllCategory());
